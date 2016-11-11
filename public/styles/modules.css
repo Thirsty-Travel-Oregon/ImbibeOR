@@ -1,0 +1,20 @@
+
+a{
+  color: grey;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #F9F823;
+  cursor:pointer;
+}
+
+.main-nav ul li {
+  display: inline-block;
+  padding: 0.5vh 8vw;
+}
+
+.submit:hover{
+  background-color: grey;
+  cursor:pointer;
+}
