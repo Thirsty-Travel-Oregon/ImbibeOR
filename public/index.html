@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="vendor/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="styles/base.css">
+    <link rel="stylesheet" type="text/css" href="styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="styles/modules.css">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+    <title>Imbibe OR</title>
+</head>
+<body>
+    <div class="static" id="header">
+        <h1>ImbibeOR</h1>
+        <img id="imbibe-logo" src = "images/imbibeLogo.png" alt="imbibe logo">
+        <nav class="main-nav">
+         <ul>
+           <div class="icon-menu"></div>
+           <li class="link"><a href="/" id="home-link"><span class="branding">ImbibeOR</span></a></li>
+           <li class="link"><a href="about" id="about-link">About</a></li>
+           <li class="link"><a href="add-thread" id="add-thread-link">Add New Thread</a></li>
+           <li class="link"><a href="search-threads" id="search-threads-link">Search Threads</a></li>
+           <li class="link"><a href="login" id="login-link">Log In</a></li>
+           <li class="link"><a href="signup" id="signup-link">Sign up</a></li>
+         </ul>
+       </nav>
+    </div>
+    <div class="content" id="home-page">
+    </div>
+    <div class="content" id="login-page">
+        <h2>Log In</h2>
+      <form>
+        Username:<br>
+        <input type="text" value="username"><br>
+        Password:<br>
+        <input type="text" value="password"><br><br>
+        <input type="submit" value="Login" class="submit">
+      </form>
+    </div>
+    <div class="content" id="signup-page">
+      <h2>Sign Up</h2>
+      <form>
+        Name:<br>
+        <input type="text" value="name"><br>
+        Email:<br>
+        <input type="email" value="email"><br>
+        Username:<br>
+        <input type="text" value="username"><br>
+        Password:<br>
+        <input type="password" value="Password"><br><br>
+        <input type="submit" value="Sign Up" class="submit">
+      </form>
+    </div>
+
+    <div class="content" id="add-thread">
+      <h2>Add New Thread</h2>
+      <form>
+        <!-- add thread dropdowns and input fields here. -->
+        <select class ="thread-select" id="drink-type-select">
+          <option value="Beer">Beer</option>
+          <option value="Wine">Wine</option>
+          <option value="Spirits">Spirits</option>
+          <option value="Other">Other</option>
+          <option value="All">All</option>
+        </select>
+        <select class ="thread-select" id="region-select">
+          <option value="Portland">Portland</option>
+          <!-- more options here -->
+        </select>
+        <br>
+        Thread Title<br>
+        <input type="text" value="Thread Title"><br>
+        Text<br>
+        <textarea value="Thread Text"rows="6" cols="80"></textarea>
+
+        <input type="submit" value="Add Thread" class="submit">
+    </form>
+    </div>
+    <div class="content" id="view-threads">
+    </div>
+    <div class="static" id="footer">
+     <p><span class="copy">&copy; Thirsty-Travel-Oregon, 2016</span></p>
+   </div>
+</body>
+</html>
