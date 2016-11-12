@@ -21,6 +21,8 @@
            <li class="link"><a href="about" id="about-link">About</a></li>
            <li class="link"><a href="add-thread" id="add-thread-link">Add New Thread</a></li>
            <li class="link"><a href="search-threads" id="search-threads-link">Search Threads</a></li>
+           <li class="link"><a href="login" id="login-link">Log In</a></li>
+           <li class="link"><a href="signup" id="signup-link">Sign up</a></li>
          </ul>
        </nav>
     </div>
@@ -52,9 +54,28 @@
     </div>
 
     <div class="content" id="add-thread">
+      <h2>Add New Thread</h2>
       <form>
+        <!-- add thread dropdowns and input fields here. -->
+        <select class ="thread-select" id="drink-type-select">
+          <option value="Beer">Beer</option>
+          <option value="Wine">Wine</option>
+          <option value="Spirits">Spirits</option>
+          <option value="Other">Other</option>
+          <option value="All">All</option>
+        </select>
+        <select class ="thread-select" id="region-select">
+          <option value="Portland">Portland</option>
+          <!-- more options here -->
+        </select>
+        <br>
+        Thread Title<br>
+        <input type="text" value="Thread Title"><br>
+        Text<br>
+        <textarea value="Thread Text"rows="6" cols="80"></textarea>
 
-      </form>
+        <input type="submit" value="Add Thread" class="submit">
+    </form>
     </div>
     <div class="content" id="view-threads">
     </div>
