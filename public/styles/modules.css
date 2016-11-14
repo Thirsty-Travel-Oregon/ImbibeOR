@@ -1,19 +1,24 @@
-
-a{
+a {
   color: grey;
   text-decoration: none;
 }
 
-a:hover{
+a:hover {
   color: #F9F823;
   cursor:pointer;
 }
 
-nav{
+nav {
   display: inline-block;
 }
+
 .main-nav ul li {
   display: inline-block;
+  padding: 0.5vh 1vw;
+}
+
+.drink-type-nav ul li {
+  list-style: none;
   padding: 0.5vh 1vw;
 }
 
@@ -21,3 +26,20 @@ nav{
   background-color: grey;
   cursor:pointer;
 }
+
+.flexcontainer {
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  align-content: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+div .content {
+  width: 50%;
+}
+
