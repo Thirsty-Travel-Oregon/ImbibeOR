@@ -1,11 +1,10 @@
-#header{
+#header {
   background-color: black;
   color: white;
 }
 
-#imbibe-logo{
+#imbibe-logo {
   max-width: 10vw;
   display: inline-block;
   padding: 2vh;
-  float:left;
 }
