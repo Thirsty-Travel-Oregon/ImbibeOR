@@ -1,5 +1,10 @@
-*{
+* {
   font-family: 'Cormorant Garamond', serif;
+}
+
+a {
+  color: grey;
+  text-decoration: none;
 }
 
 h1{
