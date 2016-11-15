@@ -27,14 +27,14 @@
         </ul>
       </nav>
 
-      <!-- --------------- sign in ------------------------- -->
+      <!-- --------------- login ------------------------- -->
       <div class="content" id="login-page">
         <h2>Log In</h2>
-        <form id="login-form" method="post">
+        <form id="login-form">
           Username:<br>
-          <input type="text" value="username"><br>
+          <input type="text" name="username"><br>
           Password:<br>
-          <input type="text" value="password"><br><br>
+          <input type="text" name="password"><br><br>
           <input type="submit" value="Login" class="submit">
         </form>
       </div>
@@ -42,15 +42,15 @@
       <!-- ----------------- sign up ----------------------- -->
       <div class="content" id="signup-page">
         <h2>Sign Up</h2>
-        <form id="signup-form" <!--action="/api/auth/signup" method="post" --> >
+        <form id="signup-form">
           Name:<br>
-          <input type="text" value="name"><br>
+          <input type="text" name="name"><br>
           Email:<br>
-          <input type="email" value="email"><br>
+          <input type="email" name="email"><br>
           Username:<br>
-          <input type="text" value="username"><br>
+          <input type="text" name="username"><br>
           Password:<br>
-          <input type="password" value="Password"><br><br>
+          <input type="password" name="Password"><br><br>
           <input type="submit" value="Sign Up" class="submit">
         </form>
       </div>
@@ -191,7 +191,8 @@
 
     <!-- Controller Files -->
    
-     
+       <script type="text/javascript" src="scripts/controllers/loginClick.js"></script>
+         <script type="text/javascript" src="scripts/controllers/signupClick.js"></script>
       <script type="text/javascript" src="scripts/controllers/homeController.js"></script>
       <script type="text/javascript" src="scripts/controllers/signupController.js"></script>
       <script type="text/javascript" src="scripts/controllers/loginController.js"></script>
