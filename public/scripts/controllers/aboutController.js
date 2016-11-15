@@ -2,12 +2,11 @@
   var aboutController = {};
 
   aboutController.reveal = function() {
-    console.log('login controller triggered.');
+    console.log('about controller triggered.');
     $('.content').not('#about-page').hide();
     $('#about-page').fadeIn();
-    // $('#home-page').fadeIn();
-    // $('.link a').css({color:'white'});
-    // $('#home-link').css({color:'grey'});
+    $('.link a').fadeIn();
+    $('#about-link').hide();
   };
 
   module.aboutController = aboutController;
