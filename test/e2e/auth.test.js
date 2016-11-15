@@ -1,4 +1,3 @@
-const app = require('../../lib/app');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const assert = chai.assert;
@@ -6,6 +5,7 @@ chai.use(chaiHttp);
 const path = require('path');
 require('dotenv').load({path: path.join(__dirname, '../.env.test')});
 const connection = require('../../lib/mongoose-config');
+const app = require('../../lib/app');
 
 
 describe('auth tests', () => {
@@ -18,18 +18,16 @@ describe('auth tests', () => {
   });
 
   describe('denies unauthorized access to threads', () => {
-    it.only('errors with 400 if not token present for POST', done => {
+    it('errors with 400 if not token present for POST', done => {
       req
         .post('/api/threads')
+        .set('authorization', '')
         .then(res => done('200 not expected'))
         .catch(res => {
-          console.log('restat', res.status)
-          console.log('resbod', res.response.body)
           assert.equal(res.status, 400);
-          assert.equal(res.response.body, 'Unauthorized - No Token Provided');
+          assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
           done();
-        });
-        // .catch(done);
+        })
     });
 
     it('errors with 403 if token invalid for POST', done => {
@@ -39,22 +37,21 @@ describe('auth tests', () => {
         .then(res => done('200 not expected'))
         .catch(res => {
           assert.equal(res.status, 403);
-          assert.equal(res.response.body, 'Unauthorized - Invalid Token');
+          assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
           done();
         })
-        .catch(done);
     });
 
     it('errors with 400 if not token present for PUT', done => {
       req
-        .put('/api/threads/:id')
+        .put('/api/threads/id')
+        .set('authorization', '')
         .then(res => done('200 not expected'))
         .catch(res => {
           assert.equal(res.status, 400);
-          assert.equal(res.response.body, 'Unauthorized - No Token Provided');
+          assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
           done();
         })
-        .catch(done);
     });
 
     it('errors with 403 if token invalid for PUT', done => {
@@ -64,22 +61,21 @@ describe('auth tests', () => {
         .then(res => done('200 not expected'))
         .catch(res => {
           assert.equal(res.status, 403);
-          assert.equal(res.response.body, 'Unauthorized - Invalid Token');
+          assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
           done();
         })
-        .catch(done);
     });
 
     it('errors with 400 if not token present for DELETE', done => {
       req
         .del('/api/threads/id')
+        .set('authorization', '')
         .then(res => done('200 not expected'))
         .catch(res => {
           assert.equal(res.status, 400);
-          assert.equal(res.response.body, 'Unauthorized - No Token Provided');
+          assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
           done();
         })
-        .catch(done);
     });
 
     it('errors with 403 if token invalid for DELETE', done => {
@@ -89,10 +85,9 @@ describe('auth tests', () => {
         .then(res => done('200 not expected'))
         .catch(res => {
           assert.equal(res.status, 403);
-          assert.equal(res.response.body, 'Unauthorized - Invalid Token');
+          assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
           done();
         })
-        .catch(done);
     });
   });
 
@@ -108,21 +103,20 @@ describe('auth tests', () => {
           assert.equal(res.response.body.error, error);
           done();
         })
-        .catch(done);
     }
+
+    it('requires username at signup', done => {
+      badRequest('/api/auth/signup', {password: 'password'}, 'username and password are required', done);
+    });
+
+    it('requires password at signup', done => {
+      badRequest('/api/auth/signup', {username: 'username'}, 'username and password are required', done);
+    });
 
     const testUser = {
       username: 'username',
       password: 'password'
-    }
-
-    it('requires username at signup', done => {
-      badRequest('api/auth/signup', {password: 'password'}, 'username and password are required', done);
-    });
-
-    it('requires password at signup', done => {
-      badRequest('api/auth/signup', {username: 'username'}, 'username and password are required', done);
-    });
+    };
 
     let token = '';
 
@@ -140,6 +134,26 @@ describe('auth tests', () => {
               done();
             })
             .catch();
+        });
+    });
+
+    it('prevents duplicate usernames', done => {
+      badRequest('/api/auth/signup', testUser, 'username username already exists', done);
+    });
+
+    it('signs a user in', done => {
+      req
+        .post('/api/auth/signin')
+        .send(testUser)
+        .then(res => {
+          req
+            .post('/api/auth/validate')
+            .set('authorization', `Bearer ${token}`)
+            .then(res => {
+              assert.isOk(res.body.valid);
+              done();
+            })
+            .catch(done);
         });
     });
   });
