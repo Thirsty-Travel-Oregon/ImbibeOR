@@ -2,8 +2,8 @@
   var homeController = {};
 
   homeController.reveal = function() {
-    // $('.content).not('.static').hide();
-    $('.content).hide();
+    console.log('home controller triggered.');
+    $('.content').not('#flexcontainer').hide();
     // $('#home-page').fadeIn();
     // $('.link a').css({color:'white'});
     // $('#home-link').css({color:'grey'});
