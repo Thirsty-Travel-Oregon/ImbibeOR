@@ -18,28 +18,32 @@ describe('auth tests', () => {
   });
 
   describe('denies unauthorized access to threads', () => {
-    it('errors with 400 if not token present for POST', done => {
+
+    function checkError(url, token, errorCode, errorMessage, done) {
       req
-        .post('/api/threads')
-        .set('authorization', '')
-        .then(res => done('200 not expected'))
-        .catch(res => {
-          assert.equal(res.status, 400);
-          assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
-          done();
-        })
+          .post(url)
+          .set('authorization', token)
+          .then(res => done('200 not expected'))
+          .catch(res => {
+            assert.equal(res.status, errorCode);
+            assert.equal(res.response.body.error, errorMessage);
+            done();
+          });
+    }
+
+    const threadMain = '/api/threads';
+    const threadId = '/api/threads/id';
+    const emptyToken = '';
+    const badToken = 'Bearer badtoken';
+    const noTokenMessage = 'Unauthorized - No Token Provided';
+    const invalidTokenMessage = 'Unauthorized - Invalid Token';
+
+    it('errors with 400 if not token present for POST', done => {
+      checkError(threadMain, emptyToken, 400, noTokenMessage, done);
     });
 
     it('errors with 403 if token invalid for POST', done => {
-      req
-        .post('/api/threads')
-        .set('authorization', 'Bearer badtoken')
-        .then(res => done('200 not expected'))
-        .catch(res => {
-          assert.equal(res.status, 403);
-          assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
-          done();
-        })
+      checkError(threadMain, badToken, 403, invalidTokenMessage, done);
     });
 
     it('errors with 400 if not token present for PUT', done => {
