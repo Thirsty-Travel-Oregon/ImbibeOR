@@ -9,6 +9,24 @@
     <link rel="stylesheet" type="text/css" href="styles/modules.css">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
     <title>Imbibe OR</title>
+
+      <!-- --------------- thread template ------------------------- -->
+    <script id="thread-template" type="text/x-handlebars-template">
+      {{#each thread}}
+        <article data-id="{{threadId}}">
+          <h1>{{title}}</h1>
+          <div>{{text}}</div>
+          <div>{{username}}</div>
+          <button name="add-remark">Add Remark</button>
+          <button name="follow-user">Follow User</button>
+          <button name="follow-thread">Follow Thread</button>
+          <button name="edit-post">Edit Post</button>
+          <button name="delete-thread">Delete Thread</button>
+          <button name="create-thread">Create New Thread</button>
+        </article>
+      {{/each}}
+    </script>
+
   </head>
   <body>
     <div class="static" id="header">
@@ -142,6 +160,7 @@
 
 <!-- ----------------- view thread ----------------------- -->
     <div class="thread-content" id="view-threads">
+      <container-for-each-thread data-id="threadId">
       <div>title</div>
       <div>text</div>
       <div>username</div>
@@ -152,6 +171,7 @@
       <button name="edit-post">Edit Post</button>
       <button name="delete-thread">Delete Thread</button>
       <button name="create-thread">Create New Thread</button>
+      </container>
     </div>
 
 <!-- ----------------- view remark ----------------------- -->
@@ -186,6 +206,7 @@
 
     <!-- Model Files -->
    <script type="text/javascript" src="clickHandling.js"></script>
+   <script type="text/javascript" src="vendor/handlebars.js"></script>
 
     <!-- View Files -->
 

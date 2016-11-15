@@ -7,10 +7,10 @@ $('area').on('click', function(e) {
   superagent
     .get(`/api/threads/region/${regionClicked}`)
     .then((res) => {
-      console.log(res);
-      //do something with the response
-      //append them to
-      $('thread-container').append(res.body);
+      const source = $('#thread-template').html();
+      const template = Handlebars.compile(source);
+      const newHtml = template(res.body);
+      $('#thread-container').append(newHtml);
     })
     .catch((err) => {
       console.log(err);
