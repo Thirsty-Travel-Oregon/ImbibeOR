@@ -8,5 +8,18 @@ $('area').on('click', function(e) {
 $('.drink-type-cat li').on('click', function(e) {
   e.preventDefault();
   var drinkTypeClicked = $(this).attr('id');
+  $('.content').hide();
   console.log(drinkTypeClicked);
+});
+
+$('.thread-content button').on('click', function(e) {
+  e.preventDefault();
+  var threadButtonClicked = $(this).attr('name');
+  console.log(threadButtonClicked);
+});
+
+$('.remark-content button').on('click', function(e) {
+  e.preventDefault();
+  var remarkButtonClicked = $(this).attr('name');
+  console.log(remarkButtonClicked);
 });
