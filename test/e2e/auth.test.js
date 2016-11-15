@@ -19,9 +19,33 @@ describe('auth tests', () => {
 
   describe('denies unauthorized access to threads', () => {
 
-    function checkError(url, token, errorCode, errorMessage, done) {
+    function checkPostError(url, token, errorCode, errorMessage, done) {
       req
           .post(url)
+          .set('authorization', token)
+          .then(res => done('200 not expected'))
+          .catch(res => {
+            assert.equal(res.status, errorCode);
+            assert.equal(res.response.body.error, errorMessage);
+            done();
+          });
+    }
+
+    function checkPutError(url, token, errorCode, errorMessage, done) {
+      req
+          .put(url)
+          .set('authorization', token)
+          .then(res => done('200 not expected'))
+          .catch(res => {
+            assert.equal(res.status, errorCode);
+            assert.equal(res.response.body.error, errorMessage);
+            done();
+          });
+    }
+
+    function checkDeleteError(url, token, errorCode, errorMessage, done) {
+      req
+          .del(url)
           .set('authorization', token)
           .then(res => done('200 not expected'))
           .catch(res => {
@@ -39,59 +63,27 @@ describe('auth tests', () => {
     const invalidTokenMessage = 'Unauthorized - Invalid Token';
 
     it('errors with 400 if not token present for POST', done => {
-      checkError(threadMain, emptyToken, 400, noTokenMessage, done);
+      checkPostError(threadMain, emptyToken, 400, noTokenMessage, done);
     });
 
     it('errors with 403 if token invalid for POST', done => {
-      checkError(threadMain, badToken, 403, invalidTokenMessage, done);
+      checkPostError(threadMain, badToken, 403, invalidTokenMessage, done);
     });
 
     it('errors with 400 if not token present for PUT', done => {
-      req
-        .put('/api/threads/id')
-        .set('authorization', '')
-        .then(res => done('200 not expected'))
-        .catch(res => {
-          assert.equal(res.status, 400);
-          assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
-          done();
-        })
+      checkPutError(threadId, emptyToken, 400, noTokenMessage, done);
     });
 
     it('errors with 403 if token invalid for PUT', done => {
-      req
-        .put('/api/threads/id')
-        .set('authorization', 'Bearer badtoken')
-        .then(res => done('200 not expected'))
-        .catch(res => {
-          assert.equal(res.status, 403);
-          assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
-          done();
-        })
+      checkPutError(threadId, badToken, 403, invalidTokenMessage, done);
     });
 
     it('errors with 400 if not token present for DELETE', done => {
-      req
-        .del('/api/threads/id')
-        .set('authorization', '')
-        .then(res => done('200 not expected'))
-        .catch(res => {
-          assert.equal(res.status, 400);
-          assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
-          done();
-        })
+      checkDeleteError(threadId, emptyToken, 400, noTokenMessage, done);
     });
 
     it('errors with 403 if token invalid for DELETE', done => {
-      req
-        .del('/api/threads/id')
-        .set('authorization', 'Bearer badtoken')
-        .then(res => done('200 not expected'))
-        .catch(res => {
-          assert.equal(res.status, 403);
-          assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
-          done();
-        })
+      checkDeleteError(threadId, badToken, 403, invalidTokenMessage, done);
     });
   });
 
@@ -106,7 +98,7 @@ describe('auth tests', () => {
           assert.equal(res.status, 400);
           assert.equal(res.response.body.error, error);
           done();
-        })
+        });
     }
 
     it('requires username at signup', done => {
