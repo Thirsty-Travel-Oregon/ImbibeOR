@@ -2,9 +2,9 @@
   var signupController = {};
 
   signupController.reveal = function() {
-    // $('.content).not('.static').hide();
-    console.log('home controller triggered.');
+    console.log('signup controller triggered.');
     $('.content').not('#signup-page').hide();
+    $('#signup-page').fadeIn();
     // $('#home-page').fadeIn();
     // $('.link a').css({color:'white'});
     // $('#home-link').css({color:'grey'});

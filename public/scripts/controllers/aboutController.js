@@ -1,14 +1,14 @@
 (function(module) {
-  var loginController = {};
+  var aboutController = {};
 
-  loginController.reveal = function() {
+  aboutController.reveal = function() {
     console.log('login controller triggered.');
-    $('.content').not('#login-page').hide();
-    $('#login-page').fadeIn();
+    $('.content').not('#about-page').hide();
+    $('#about-page').fadeIn();
     // $('#home-page').fadeIn();
     // $('.link a').css({color:'white'});
     // $('#home-link').css({color:'grey'});
   };
 
-  module.loginController = loginController;
+  module.aboutController = aboutController;
 })(window);
