@@ -55,7 +55,7 @@ describe('auth tests', () => {
           assert.equal(res.status, 400);
           assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
           done();
-        })
+        });
     });
 
     it('errors with 403 if token invalid for PUT', done => {
@@ -67,7 +67,7 @@ describe('auth tests', () => {
           assert.equal(res.status, 403);
           assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
           done();
-        })
+        });
     });
 
     it('errors with 400 if not token present for DELETE', done => {
@@ -79,7 +79,7 @@ describe('auth tests', () => {
           assert.equal(res.status, 400);
           assert.equal(res.response.body.error, 'Unauthorized - No Token Provided');
           done();
-        })
+        });
     });
 
     it('errors with 403 if token invalid for DELETE', done => {
@@ -91,7 +91,7 @@ describe('auth tests', () => {
           assert.equal(res.status, 403);
           assert.equal(res.response.body.error, 'Unauthorized - Invalid Token');
           done();
-        })
+        });
     });
   });
 
@@ -106,7 +106,7 @@ describe('auth tests', () => {
           assert.equal(res.status, 400);
           assert.equal(res.response.body.error, error);
           done();
-        })
+        });
     }
 
     it('requires username at signup', done => {
