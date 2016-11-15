@@ -1,13 +1,12 @@
 (function(module) {
   var loginController = {};
 
-  signupController.reveal = function() {
-    // $('.content).not('.static').hide();
-    console.log('home controller triggered.');
+  loginController.reveal = function() {
+    console.log('login controller triggered.');
     $('.content').not('#login-page').hide();
-    // $('#home-page').fadeIn();
-    // $('.link a').css({color:'white'});
-    // $('#home-link').css({color:'grey'});
+    $('#login-page').fadeIn();
+    $('.link a').fadeIn();
+    $('#login-link').hide();
   };
 
   module.loginController = loginController;
