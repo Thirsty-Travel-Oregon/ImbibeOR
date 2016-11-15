@@ -1,0 +1,35 @@
+{
+"title": "Boneyard Brewing",
+"text": "This place has the best beer in Bend.  Get the rpm IPA.",
+"region": "Central",
+"drinkType": "beer"
+}
+
+{
+"title": "Wineries",
+"text": "Anyone know a particularly good winery in the Willmette Valley?  Cost is not an issue.",
+"region": "Willamette Valley",
+"drinkType": "wine"
+}
+
+{
+"title": "Laurelwood Brewery",
+"text": "I love this place.  The workhorse is my favorite local IPA.",
+"region": "Portland",
+"drinkType": "beer"
+}
+
+{
+"title": "Pelican Brewing",
+"text": "Not my favorite, but there are limited options on the coast.  Anyone know what's god here?",
+"region": "North Coast",
+"drinkType": "beer"
+}
+
+{
+"title": "pFriem",
+"text": "Great belgian style beers here.  The belgian strong dark will knock your socks off.  Nice, floral IPA.",
+"region": "Columbia River Gorge",
+"drinkType": "beer"
+}
+
