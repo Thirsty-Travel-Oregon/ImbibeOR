@@ -1,0 +1,21 @@
+{
+"title": "Boneyard Brewing",
+"text": "This place has the best beer in Bend.  Get the rpm IPA.",
+"region": "Central",
+"drinkType": "beer"
+}
+
+{
+"title": "Wineries",
+"text": "Anyone know a particularly good winery in the Willmette Valley?  Cost is not an issue.",
+"region": "Willamette Valley",
+"drinkType": "wine"
+}
+
+{
+"title": "Laurelwood Brewery",
+"text": "I love this place.  The workhorse is my favorite local IPA.",
+"region": "Portland",
+"drinkType": "beer"
+}
+
