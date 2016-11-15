@@ -30,15 +30,15 @@ nav {
   justify-content: center;
 }
 
-#drink-type-cat {
+.drink-type-cat {
   margin-right: 0.5rem;
 }
 
-#drink-type-cat li {
+.drink-type-cat li {
   list-style: none;
 }
 
-#drink-type-cat li img{
+.drink-type-cat li img{
   width: 70%;
 }
 
