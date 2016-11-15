@@ -27,10 +27,10 @@
         </ul>
       </nav>
 
-      <!-- --------------- sign in ------------------------- -->
+      <!-- --------------- login ------------------------- -->
       <div class="content" id="login-page">
         <h2>Log In</h2>
-        <form id="login-form" method="post">
+        <form id="login-form" action="/api/auth/login" method="post">
           Username:<br>
           <input type="text" value="username"><br>
           Password:<br>
@@ -42,7 +42,7 @@
       <!-- ----------------- sign up ----------------------- -->
       <div class="content" id="signup-page">
         <h2>Sign Up</h2>
-        <form id="signup-form" action="/api/auth/login" method="post">
+        <form id="signup-form" action="/api/auth/signup" method="post">
           Name:<br>
           <input type="text" value="name"><br>
           Email:<br>
