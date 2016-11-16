@@ -4,6 +4,8 @@
   homeController.reveal = function() {
     console.log('home controller triggered.');
     $('.content').not('#flexcontainer').hide();
+    $('.thread-content').fadeIn();
+    $('.remark-content').fadeIn();
     $('#flexcontainer').fadeIn();
     $('#view-threads').fadeIn();
     $('#view-remarks').fadeIn();

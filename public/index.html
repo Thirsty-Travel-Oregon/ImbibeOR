@@ -99,7 +99,7 @@
 <!-- ------------------ add thread ---------------------- -->
     <div class="content" id="add-thread">
       <h2>Add New Thread</h2>
-      <form id="add-thread-form" method="post">
+      <form id="add-thread-form">
         <!-- add thread dropdowns and input fields here. -->
         <select class ="thread-select" id="drink-type-select">
           <option value="Beer">Beer</option>
@@ -146,23 +146,23 @@
       <div>text</div>
       <div>username</div>
       <div id="thread-container"></div>
-      <button name="add-remark">Add Remark</button>
-      <button name="follow-user">Follow User</button>
-      <button name="follow-thread">Follow Thread</button>
-      <button name="edit-post">Edit Post</button>
-      <button name="delete-thread">Delete Thread</button>
-      <button name="create-thread">Create New Thread</button>
+      <button name="add-remark" id="add-remark" >Add Remark</button>
+      <button name="follow-user" id="follow-user">Follow User</button>
+      <button name="follow-thread" id="follow-thread">Follow Thread</button>
+      <button name="edit-post" id="edit-post">Edit Post</button>
+      <button name="delete-thread" id="delete-thread">Delete Thread</button>
+      <button name="create-thread" href="add-thread">Create New Thread</button>
     </div>
 
 <!-- ----------------- view remark ----------------------- -->
     <div class="remark-content" id="view-remarks">
       <div>text</div>
       <div>username</div>
-      <button name="add-remark">Add Remark</button>
-      <button name="follow-user">Follow User</button>
-      <button name="edit-remark">Edit Remark</button>
-      <button name="delete-remark">Delete Remark</button>
-      <button name="create-thread">Create New Thread</button>
+      <button name="add-remark" id="add-remark">Add Remark</button>
+      <button name="follow-user" id="follow-user">Follow User</button>
+      <button name="edit-remark" id="edit-remark">Edit Remark</button>
+      <button name="delete-remark" id="delete-remark">Delete Remark</button>
+      <button name="create-thread" href="/add-thread">Create New Thread</button>
     </div>
 
 <!-- ------------------ about ---------------------- -->

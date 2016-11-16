@@ -11,9 +11,12 @@ $('#login-form').submit(function(event) {
     .set('Content-Type', 'application/json')
     .send(jsonData)
     .then((res) => {
-      console.log('response is ', res);
-      $('#login-form').append('<p>Signed up as <em>'+submitObj.username+'</em></p>');
-      $('#login-form').append('<p>Your token is <em>'+res.text+'</em></p>');
+      const token = (JSON.parse(res.text)).token;
+      console.log('res text is ', res.text);
+      $('#login-form').append('<p>Logged as <em>'+submitObj.username+'</em></p>');
+      $('#login-form').append('<p>Your token is <em>'+token+'</em></p>');
+      sessionStorage.setItem('storedToken', token);
+      // sessionStorage.setItem('storedUserID', )
     })
     .catch((err) => {
       console.log(err);
