@@ -9,6 +9,13 @@
     $('#signup-page').fadeIn();
     $('.link a').fadeIn();
     $('#signup-link').hide();
+    if(!sessionStorage.getItem('storedToken')){
+      $('#logout-link').hide();
+      $('following-link').hide();
+    }
+    else{
+      $('#login-link').hide();
+    }
   };
 
   module.signupController = signupController;

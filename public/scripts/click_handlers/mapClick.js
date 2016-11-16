@@ -12,6 +12,10 @@ $('area').on('click', function(e) {
       const threadObject = {thread: res.body};
       const newHtml = template(threadObject);
       $('#thread-container').append(newHtml);
+
+      if (!sessionStorage.getItem('storedToken')) {
+        $('#thread-container button').hide();
+      }
     })
     .catch((err) => {
       console.log(err);
