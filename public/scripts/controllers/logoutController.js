@@ -14,6 +14,7 @@
       $('#logout-message').text('You are already logged out.  Sign up or log in.');
     }
     else{
+        //TODO uncomment the following line once we get the updated backend with Username being stored correctly.
     //   $('#logout-message').text('You are currently logged in as '+sessionStorage(getItem('storedUsername'))+'.');
       $('#logout-button').fadeIn();
       $('#signup-link').hide();
