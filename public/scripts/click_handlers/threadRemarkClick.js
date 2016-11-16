@@ -1,17 +1,20 @@
 //buttons for the threads
 $('#thread-container').on('click', 'button', function(e) {
   e.preventDefault();
-  const id = sessionStorage.getItem('storedUserID');
   const token = 'Bearer ' + sessionStorage.getItem('storedToken');
-  const threadButtonClicked = $(this).attr('name');
-  console.log('id', id);
 
-  const userIdMarker = e.target.getAttribute('data-userId');
-  console.log('userIdMarker', userIdMarker);
+  const threadButtonClicked = $(this).attr('name');
+  console.log('button clicked', threadButtonClicked);
+
+  const currUserid = sessionStorage.getItem('storedUserID');
+  console.log('currUserId', currUserId);
+
+  const threadOwnerIdMarker = e.target.getAttribute('data-userId');
+  console.log('threadOwnerIdMarker', userIdMarker);
+
   const threadIdMarker = e.target.getAttribute('data-threadId');
   console.log('threadIdMarker', threadIdMarker);
 
-  console.log('button clicked', threadButtonClicked);
 
   if (threadButtonClicked === 'add-remark') {
     superagent
@@ -28,10 +31,10 @@ $('#thread-container').on('click', 'button', function(e) {
       });
   }else if (threadButtonClicked === 'follow-user') {
     superagent
-      .put(`/api/users/followUser/${userIdMarker}`)
+      .put(`/api/users/followUser/${threadOwnerIdMarker}`)
       .set({'Content-Type': 'application/json'})
       .set({'Authorization': token})
-      .send({userId: id})
+      .send({userId: currUserId})
       .then(() => {
       })
       .catch((err) => {
