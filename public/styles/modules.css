@@ -17,6 +17,11 @@ nav {
   cursor:pointer;
 }
 
+button:hover{
+  background-color: grey;
+  cursor:pointer;
+}
+
 /*-------------- categories - map & buttons -------------------*/
 #flexcontainer {
   display: -webkit-flex;

@@ -1,4 +1,4 @@
-$('#login-form').submit(function(event) {
+$('#logout-button').submit(function(event) {
   event.preventDefault();
   var submitData = $( this ).serializeArray();
   const submitObj = {
@@ -19,10 +19,7 @@ $('#login-form').submit(function(event) {
       $('#signup-link').hide();
       $('#login-link').hide();
       $('#logout-link').fadeIn();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
 });
 
 

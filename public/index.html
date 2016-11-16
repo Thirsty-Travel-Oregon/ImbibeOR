@@ -57,8 +57,10 @@
           <li class="link"><a href="about" id="about-link">About</a></li>
           <li class="link"><a href="add-thread" id="add-thread-link">Add New Thread</a></li>
           <li class="link"><a href="search-threads" id="search-threads-link">Search Threads</a></li>
-          <li class="link"><a href="login" id="login-link">Log In</a></li>
+          <li class="link"><a href="following"  id="following-link">Following</a></li>
+          <li class="link"><a href="login"  id="login-link">Log In</a></li>
           <li class="link"><a href="signup" id="signup-link">Sign up</a></li>
+          <li class="link"><a href="logout" id="logout-link">Log Out</a></li>
         </ul>
       </nav>
 
@@ -88,6 +90,12 @@
           <input type="password" name="Password"><br><br>
           <input type="submit" value="Sign Up" class="submit">
         </form>
+      </div>
+
+      <!-- --------------- logout ------------------------- -->
+      <div class="content" id="logout-page">
+        <h2>"You are logged in as ", </h2>
+         <button id="log-out">Log Out</button>
       </div>
 
     </div>
@@ -186,6 +194,14 @@
       <p>about information here </p>
     </div>
 
+  <!-- --------------- following ------------------------- -->
+      <div class="content" id="following-page">
+        <h2>Following </h2>
+      </div>
+
+
+
+    </div>
 <!-- --------------------- footer ------------------- -->
     <div class="static" id="footer">
       <p><span class="copy">&copy; Thirsty-Travel-Oregon, 2016</span></p>
@@ -213,7 +229,9 @@
     <script type="text/javascript" src="scripts/controllers/signupController.js"></script>
     <script type="text/javascript" src="scripts/controllers/loginController.js"></script>
     <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
-    <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>  
+    <script type="text/javascript" src="scripts/controllers/logoutController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/followingController.js"></script>
     <script type="text/javascript" src="scripts/controllers/routes.js"></script>
 
     
