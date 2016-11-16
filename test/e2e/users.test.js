@@ -19,8 +19,6 @@ describe('user routing', () => {
     else connection.once('open', drop);
   });
 
- 
-
   function getUserId(user, done) {
     User.find({username: user.username})
       .then(res => {
@@ -43,6 +41,10 @@ describe('user routing', () => {
     roles: ['moderator']
   };
 
+  const exTestMod = {
+    roles: []
+  };
+
   const testUser = {
     username: 'testUser',
     password: 'testUser'
@@ -54,8 +56,10 @@ describe('user routing', () => {
   //   req
   //     .post('/api/auth/signup')
   //     .send(user)
-  //     .then(res => assert.isOk(token = res.body.token))
-  //     .then(res=>console.log('token', res))
+  //     .then(res => {
+  //       assert.isOk(user._id = res.body.userId);
+  //       assert.isOk(token = res.body.token);
+  //     })
   //     .then(done)
   //     .catch(done);
   // };
@@ -64,40 +68,37 @@ describe('user routing', () => {
     req
       .post('/api/auth/signup')
       .send(testAdmin)
-      .then(res => assert.isOk(adminToken = res.body.token))
+      .then(res => {
+        assert.isOk(testAdmin._id = res.body.userId);
+        assert.isOk(adminToken = res.body.token);
+      })
       .then(done)
       .catch(done);
     // makeUser(testAdmin, adminToken, done);
   });
 
-  before(done => {
-    getUserId(testAdmin, done);
-  });
-
-  before(done => {
-    req
-      .post('/api/auth/signup')
-      .send(testMod)
-      .then(res => assert.isOk(modToken = res.body.token))
-      .then(done)
-      .catch(done);
-  });
-
-  before(done => {
-    getUserId(testMod, done);
-  });
+  // before(done => {
+  //   req
+  //     .post('/api/auth/signup')
+  //     .send(testMod)
+  //     .then(res => {
+  //       assert.isOk(testMod._id = res.body.userId);
+  //       assert.isOk(modToken = res.body.token);
+  //     })
+  //     .then(done)
+  //     .catch(done);
+  // });
 
   before(done => {
     req
       .post('/api/auth/signup')
       .send(testUser)
-      .then(res => assert.isOk(userToken = res.body.token))
+      .then(res => {
+        assert.isOk(testUser._id = res.body.userId);
+        assert.isOk(userToken = res.body.token);
+      })
       .then(done)
       .catch(done);
-  });
-
-  before(done => {
-    getUserId(testUser, done);
   });
 
   it('GET all users', done => {
@@ -105,7 +106,7 @@ describe('user routing', () => {
       .get('/api/users')
       .set('authorization', `Bearer ${adminToken}`)
       .then(res => {
-        expect(res.body).lengthOf(3);
+        expect(res.body).lengthOf(2);
         done();
       })
       .catch(done);
@@ -116,9 +117,57 @@ describe('user routing', () => {
       .get(`/api/users/${testUser._id}`)
       .set('authorization', `Bearer ${adminToken}`)
       .then(res => {
-        assert.equal(res.body.username, testUser.username);
+        const user = res.body;
+        assert.equal(user._id, testUser._id);
+        assert.equal(user.username, testUser.username);
         done();
       })
       .catch(done);
   });
+
+  it('DELETE single user', done => {
+    req
+      .del(`/api/users/${testUser._id}`)
+      .set('authorization', `Bearer ${adminToken}`)
+      .then(res => {
+        const user = res.body;
+        assert.equal(user._id, testUser._id);
+        assert.equal(user.username, testUser.username);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('POST a new user', done => {
+    req
+      .post('/api/users')
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(testMod)
+      .then(res => {
+        const user = res.body;
+        assert.equal(user.username, testMod.username);
+        assert.equal(user.password, testMod.password);
+        assert.deepEqual(user.roles, testMod.roles);
+        testMod._id = user._id;
+        testMod.__v = user.__v;
+        testMod.threadsFollowed = user.threadsFollowed;
+        testMod.usersFollowed = user.usersFollowed;
+        done();
+      })
+      .catch(done);
+  });
+
+  it('edits a current user PUT', done => {
+    req
+      .put(`/api/users/${testMod._id}`)
+      .set('authorization', `Bearer ${adminToken}`)
+      .send(exTestMod)
+      .then(res => {
+        const user = res.body;
+        assert.deepEqual(user, testMod);
+        expect(user.roles).lengthOf(1);
+        done();
+      })
+      .catch(done);
+  })
 });
