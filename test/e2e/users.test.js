@@ -52,17 +52,21 @@ describe('user routing', () => {
 
   let adminToken, modToken, userToken = '';
 
-  // function makeUser(user, token, done) {
-  //   req
-  //     .post('/api/auth/signup')
-  //     .send(user)
-  //     .then(res => {
-  //       assert.isOk(user._id = res.body.userId);
-  //       assert.isOk(token = res.body.token);
-  //     })
-  //     .then(done)
-  //     .catch(done);
-  // };
+  const testFollows = {
+    username: 'testFollows',
+    password: 'testPWD',
+    roles: ['basic']
+  };
+  
+  let followsToken = '';
+
+  const followsUser = {
+    userId: ''
+  };
+
+  const followsThread = {
+    threadId: ''
+  };
 
   before(done => {
     req
@@ -74,20 +78,7 @@ describe('user routing', () => {
       })
       .then(done)
       .catch(done);
-    // makeUser(testAdmin, adminToken, done);
   });
-
-  // before(done => {
-  //   req
-  //     .post('/api/auth/signup')
-  //     .send(testMod)
-  //     .then(res => {
-  //       assert.isOk(testMod._id = res.body.userId);
-  //       assert.isOk(modToken = res.body.token);
-  //     })
-  //     .then(done)
-  //     .catch(done);
-  // });
 
   before(done => {
     req
@@ -101,12 +92,25 @@ describe('user routing', () => {
       .catch(done);
   });
 
+
+  before(done => {
+    req
+      .post('/api/auth/signup')
+      .send(testFollows)
+      .then(res => {
+        assert.isOk(testFollows._id = res.body.userId);
+        assert.isOk(followsToken = res.body.token);
+      })
+      .then(done)
+      .catch(done);
+  });
+
   it('GET all users', done => {
     req
       .get('/api/users')
       .set('authorization', `Bearer ${adminToken}`)
       .then(res => {
-        expect(res.body).lengthOf(2);
+        expect(res.body).lengthOf(3);
         done();
       })
       .catch(done);
@@ -120,6 +124,108 @@ describe('user routing', () => {
         const user = res.body;
         assert.equal(user._id, testUser._id);
         assert.equal(user.username, testUser.username);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('FOLLOW User', done => {
+    followsUser.userId = testUser._id;
+    req
+      .put(`/api/users/followUser/${testFollows._id}`)
+      .set('Authorization', `Bearer ${followsToken}`)
+      .send(followsUser)
+      .then(res => {
+        assert.isOk(res.body.ok, 'Update succeeded');
+        testFollows.usersFollowed = [];
+        testFollows.usersFollowed.push(testUser._id.toString());
+        done();
+      })
+      .catch(done);
+  });
+
+
+  it('FOLLOW User2', done => {
+    followsUser.userId = testAdmin._id;
+    req
+      .put(`/api/users/followUser/${testFollows._id}`)
+      .set('Authorization', `Bearer ${followsToken}`)
+      .send(followsUser)
+      .then(res => {
+        assert.isOk(res.body.ok, 'Update succeeded');
+        testFollows.usersFollowed.push(testAdmin._id.toString());
+        done();
+      })
+      .catch(done);
+  });
+
+  it('FOLLOW User 1 again', done => {
+    followsUser.userId = testUser._id;
+    req
+      .put(`/api/users/followUser/${testFollows._id}`)
+      .set('Authorization', `Bearer ${followsToken}`)
+      .send(followsUser)
+      .then(res => {
+        assert.isOk(res.body, 'Update succeeded');
+        done();
+      })
+      .catch(done);
+  });
+
+  it('FOLLOW Thread 1', done => {
+    followsThread.threadId = testUser._id;
+    req
+      .put(`/api/users/followThread/${testFollows._id}`)
+      .set('Authorization', `Bearer ${followsToken}`)
+      .send(followsThread)
+      .then(res => {
+        assert.isOk(res.body.ok, 'Update succeeded');
+        testFollows.threadsFollowed = [];
+        testFollows.threadsFollowed.push(testUser._id.toString());
+        done();
+      })
+      .catch(done);
+  });
+
+  it('FOLLOW Thread 2', done => {
+    followsThread.threadId = testAdmin._id;
+    req
+      .put(`/api/users/followThread/${testFollows._id}`)
+      .set('Authorization', `Bearer ${followsToken}`)
+      .send(followsThread)
+      .then(res => {
+        assert.isOk(res.body.ok, 'Update succeeded');
+        testFollows.threadsFollowed.push(testAdmin._id.toString());
+        done();
+      })
+      .catch(done);
+  });
+
+  it('FOLLOW Thread 1 Again', done => {
+    followsThread.threadId = testUser._id;
+    req
+      .put(`/api/users/followThread/${testFollows._id}`)
+      .set('Authorization', `Bearer ${followsToken}`)
+      .send(followsThread)
+      .then(res => {
+        assert.isOk(res.body, 'Update succeeded');
+        done();
+      })
+      .catch(done);
+  });
+
+  it('GET single user', done => {
+    req
+      .get(`/api/users/${testFollows._id}`)
+      .set('authorization', `Bearer ${adminToken}`)
+      .then(res => {
+        assert.equal(res.body._id, testFollows._id);
+        expect(res.body.usersFollowed).lengthOf(2);
+        assert.equal(res.body.usersFollowed[0], testFollows.usersFollowed[0]);
+        assert.equal(res.body.usersFollowed[1], testFollows.usersFollowed[1]);
+        expect(res.body.threadsFollowed).lengthOf(2);
+        assert.equal(res.body.threadsFollowed[0], testFollows.threadsFollowed[0]);
+        assert.equal(res.body.threadsFollowed[1], testFollows.threadsFollowed[1]);
         done();
       })
       .catch(done);
@@ -169,5 +275,5 @@ describe('user routing', () => {
         done();
       })
       .catch(done);
-  })
+  });
 });
