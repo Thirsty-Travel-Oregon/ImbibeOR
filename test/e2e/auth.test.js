@@ -17,76 +17,108 @@ describe('auth tests', () => {
     else connection.once('open', drop);
   });
 
+  function checkPostError(url, token, errorCode, errorMessage, done) {
+    req
+        .post(url)
+        .set('authorization', token)
+        .then(res => done('200 not expected'))
+        .catch(res => {
+          assert.equal(res.status, errorCode);
+          assert.equal(res.response.body.error, errorMessage);
+          done();
+        });
+  }
+
+  function checkPutError(url, token, errorCode, errorMessage, done) {
+    req
+        .put(url)
+        .set('authorization', token)
+        .then(res => done('200 not expected'))
+        .catch(res => {
+          assert.equal(res.status, errorCode);
+          assert.equal(res.response.body.error, errorMessage);
+          done();
+        });
+  }
+
+  function checkDeleteError(url, token, errorCode, errorMessage, done) {
+    req
+        .del(url)
+        .set('authorization', token)
+        .then(res => done('200 not expected'))
+        .catch(res => {
+          assert.equal(res.status, errorCode);
+          assert.equal(res.response.body.error, errorMessage);
+          done();
+        });
+  }
+
+  const threadMain = '/api/threads';
+  const threadId = '/api/threads/id';
+  const remarkMain = '/api/remarks';
+  const remarkId = '/api/remarks/id';
+  const emptyToken = '';
+  const badToken = 'Bearer badtoken';
+  const noTokenMessage = 'Unauthorized - No Token Provided';
+  const invalidTokenMessage = 'Unauthorized - Invalid Token';
+
   describe('denies unauthorized access to threads', () => {
 
-    function checkPostError(url, token, errorCode, errorMessage, done) {
-      req
-          .post(url)
-          .set('authorization', token)
-          .then(res => done('200 not expected'))
-          .catch(res => {
-            assert.equal(res.status, errorCode);
-            assert.equal(res.response.body.error, errorMessage);
-            done();
-          });
-    }
-
-    function checkPutError(url, token, errorCode, errorMessage, done) {
-      req
-          .put(url)
-          .set('authorization', token)
-          .then(res => done('200 not expected'))
-          .catch(res => {
-            assert.equal(res.status, errorCode);
-            assert.equal(res.response.body.error, errorMessage);
-            done();
-          });
-    }
-
-    function checkDeleteError(url, token, errorCode, errorMessage, done) {
-      req
-          .del(url)
-          .set('authorization', token)
-          .then(res => done('200 not expected'))
-          .catch(res => {
-            assert.equal(res.status, errorCode);
-            assert.equal(res.response.body.error, errorMessage);
-            done();
-          });
-    }
-
-    const threadMain = '/api/threads';
-    const threadId = '/api/threads/id';
-    const emptyToken = '';
-    const badToken = 'Bearer badtoken';
-    const noTokenMessage = 'Unauthorized - No Token Provided';
-    const invalidTokenMessage = 'Unauthorized - Invalid Token';
-
-    it('errors with 400 if not token present for POST', done => {
+    it('errors with 400 if not token present for thread POST', done => {
       checkPostError(threadMain, emptyToken, 400, noTokenMessage, done);
     });
 
-    it('errors with 403 if token invalid for POST', done => {
+    it('errors with 403 if token invalid for thread POST', done => {
       checkPostError(threadMain, badToken, 403, invalidTokenMessage, done);
     });
 
-    it('errors with 400 if not token present for PUT', done => {
+    it('errors with 400 if not token present for thread PUT', done => {
       checkPutError(threadId, emptyToken, 400, noTokenMessage, done);
     });
 
-    it('errors with 403 if token invalid for PUT', done => {
+    it('errors with 403 if token invalid for thread PUT', done => {
       checkPutError(threadId, badToken, 403, invalidTokenMessage, done);
     });
 
-    it('errors with 400 if not token present for DELETE', done => {
+    it('errors with 400 if not token present for thread DELETE', done => {
       checkDeleteError(threadId, emptyToken, 400, noTokenMessage, done);
     });
 
-    it('errors with 403 if token invalid for DELETE', done => {
+    it('errors with 403 if token invalid for thread DELETE', done => {
       checkDeleteError(threadId, badToken, 403, invalidTokenMessage, done);
     });
   });
 
+
+  describe('denies unauthorized access to remarks', () => {
+
+    it('errors with 400 if not token present for remark POST', done => {
+      checkPostError(remarkMain, emptyToken, 400, noTokenMessage, done);
+    });
+
+    it('errors with 403 if token invalid for remark POST', done => {
+      checkPostError(remarkMain, badToken, 403, invalidTokenMessage, done);
+    });
+
+    it('errors with 400 if not token present for remark PUT', done => {
+      checkPutError(remarkId, emptyToken, 400, noTokenMessage, done);
+    });
+
+    it('errors with 403 if token invalid for remark PUT', done => {
+      checkPutError(remarkId, badToken, 403, invalidTokenMessage, done);
+    });
+
+    it('errors with 400 if not token present for remark DELETE', done => {
+      checkDeleteError(remarkId, emptyToken, 400, noTokenMessage, done);
+    });
+
+    it('errors with 403 if token invalid for remark DELETE', done => {
+      checkDeleteError(remarkId, badToken, 403, invalidTokenMessage, done);
+    });
+
+  });
+  
+  
   describe('user signup and login', () => {
 
     function badRequest(url, userData, error, done) {
