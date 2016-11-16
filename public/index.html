@@ -13,7 +13,7 @@
       <!-- --------------- thread template ------------------------- -->
     <script id="thread-template" type="text/x-handlebars-template">
       {{#each thread}}
-        <article data-id="{{threadId}}">
+        <article data-threadId="{{threadId}}" data-userId="{{userId}}">
           <h3>{{title}}</h3>
           <div>{{text}}</div>
           <div>{{username}}</div>
@@ -123,11 +123,11 @@
 
       <!-- ------------------ drink type categories ---------------------- -->
         <ul class="drink-type-cat">
-          <li class="img-link" id="beer-cat"><a href="#"><img src="./assets/beer-button.png" alt="BEER"></img></a></li>
-          <li class="img-link" id="wine-cat"><a href="#"><img src="./assets/wine-button.png" alt="WINE"></img></a></li>
-          <li class="img-link" id="spirits-cat"><a href="#"><img src="./assets/spirits-button.png" alt="SPIRITS"></img></a></li>
-          <li class="img-link" id="other-cat"><a href="#"><img src="./assets/other-button.png" alt="OTHER"></img></a></li>
-          <li class="img-link" id="all-cat"><a href="#"><img src="./assets/all-button.png" alt="ALL"></img></a></li>
+          <li class="img-link" id="beer"><a href="#"><img src="./assets/beer-button.png" alt="BEER"></img></a></li>
+          <li class="img-link" id="wine"><a href="#"><img src="./assets/wine-button.png" alt="WINE"></img></a></li>
+          <li class="img-link" id="spirits"><a href="#"><img src="./assets/spirits-button.png" alt="SPIRITS"></img></a></li>
+          <li class="img-link" id="other"><a href="#"><img src="./assets/other-button.png" alt="OTHER"></img></a></li>
+          <li class="img-link" id="all"><a href="#"><img src="./assets/all-button.png" alt="ALL"></img></a></li>
         </ul>
     </div>
 
