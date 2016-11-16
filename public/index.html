@@ -57,8 +57,10 @@
           <li class="link"><a href="about" id="about-link">About</a></li>
           <li class="link"><a href="add-thread" id="add-thread-link">Add New Thread</a></li>
           <li class="link"><a href="search-threads" id="search-threads-link">Search Threads</a></li>
-          <li class="link"><a href="login" id="login-link">Log In</a></li>
+          <li class="link"><a href="following"  id="following-link">Following</a></li>
+          <li class="link"><a href="login"  id="login-link">Log In</a></li>
           <li class="link"><a href="signup" id="signup-link">Sign up</a></li>
+          <li class="link"><a href="logout" id="logout-link">Log Out</a></li>
         </ul>
       </nav>
 
@@ -88,6 +90,12 @@
           <input type="password" name="Password"><br><br>
           <input type="submit" value="Sign Up" class="submit">
         </form>
+      </div>
+
+      <!-- --------------- logout ------------------------- -->
+      <div class="content" id="logout-page">
+        <h2 id='logout-message'></h2>
+         <button id="logout-button">Log Out</button>
       </div>
 
     </div>
@@ -183,6 +191,23 @@
       <p>about information here </p>
     </div>
 
+  <!-- --------------- following ------------------------- -->
+      <div class="content" id="following-page">
+        <h2 >Following </h2>
+        <br>
+        <h3 id='following-users-tag'>Users</h3>
+        <a></a>
+        <br><br>
+
+        <h3 id='following-threads-tag'>Threads</h3>
+        <a></a>
+        <br><br>
+
+      </div>
+
+
+
+    </div>
 <!-- --------------------- footer ------------------- -->
     <div class="static" id="footer">
       <p><span class="copy">&copy; Thirsty-Travel-Oregon, 2016</span></p>
@@ -195,13 +220,12 @@
     <script type="text/javascript">$('map').imageMapResize();</script>
   
     <script src="vendor/superagent/superagent.js"></script>
-
-    <!-- Model Files -->
-   <script type="text/javascript" src="vendor/handlebars.js"></script>
+    <script type="text/javascript" src="vendor/handlebars.js"></script>
 
     <!-- Click Handlers Files -->
     <script type="text/javascript" src="scripts/click_handlers/addThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/loginClick.js"></script>
+    <script type="text/javascript" src="scripts/controllers/logoutClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/signupClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/threadRemarkClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/drinkTypeClick.js"></script>
@@ -212,9 +236,10 @@
     <script type="text/javascript" src="scripts/controllers/signupController.js"></script>
     <script type="text/javascript" src="scripts/controllers/loginController.js"></script>
     <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
-    <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>  
+    <script type="text/javascript" src="scripts/controllers/logoutController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/followingController.js"></script>
     <script type="text/javascript" src="scripts/controllers/routes.js"></script>
-
     
   </body>
 </html>
