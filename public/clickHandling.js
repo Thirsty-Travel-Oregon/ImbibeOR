@@ -2,6 +2,7 @@
 //all get requests
 $('area').on('click', function(e) {
   e.preventDefault();
+  $('#thread-container').empty();
   var regionClicked = $(this).attr('id');
   console.log(regionClicked);
   superagent
@@ -9,7 +10,8 @@ $('area').on('click', function(e) {
     .then((res) => {
       const source = $('#thread-template').html();
       const template = Handlebars.compile(source);
-      const newHtml = template(res.body);
+      const threadObject = {thread: res.body};
+      const newHtml = template(threadObject);
       $('#thread-container').append(newHtml);
     })
     .catch((err) => {
@@ -36,7 +38,7 @@ $('.drink-type-cat li').on('click', function(e) {
     });
 });
 
-$('.thread-content button').on('click', function(e) {
+$('#thread-container').on('click', 'button', function(e) {
   e.preventDefault();
   var threadButtonClicked = $(this).attr('name');
   console.log(threadButtonClicked);
