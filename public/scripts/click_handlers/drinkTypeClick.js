@@ -20,4 +20,4 @@ $('.drink-type-cat li').on('click', function(e) {
     .catch((err) => {
       console.log(err);
     });
-});``
+});
