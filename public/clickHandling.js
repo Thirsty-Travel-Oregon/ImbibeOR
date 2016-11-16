@@ -50,7 +50,9 @@ $('#thread-container').on('click', 'button', function(e) {
   console.log('id', id);
 
   const userIdMarker = e.target.getAttribute('data-userId');
-  console.log('idmarker', userIdMarker);
+  console.log('userIdMarker', userIdMarker);
+  const threadIdMarker = e.target.getAttribute('data-threadId');
+  console.log('threadIdMarker', threadIdMarker);
 
   console.log('button clicked', threadButtonClicked);
 
@@ -69,7 +71,7 @@ $('#thread-container').on('click', 'button', function(e) {
       .put(`/api/users/followUser/${userIdMarker}`)
       .set({'Content-Type': 'application/json'})
       .set({'Authorization': token})
-      .send('{"userId": id}')
+      .send({userId: id})
       .then(() => {
       })
       .catch((err) => {
@@ -80,18 +82,28 @@ $('#thread-container').on('click', 'button', function(e) {
       .put(`/api/users/followThread/${userIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      .send('{"userId": id}')
+      .send({threadId: threadIdMarker
+      })
       .then((res) => {
       })
       .catch((err) => {
         console.log(err);
       });
   }else if (threadButtonClicked === 'edit-post') {
-
+    //how to do this???
   }else if (threadButtonClicked === 'delete-thread') {
-
+    superagent
+      .put(`/api/users/followThread/${userIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send({threadId: threadIdMarker})
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }else if (threadButtonClicked === 'create-thread') {
-
+    location.href = '/add-thread';
   }
 
 });
