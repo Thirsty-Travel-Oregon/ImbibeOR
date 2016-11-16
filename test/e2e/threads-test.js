@@ -57,8 +57,11 @@ describe('Thread Tests: ', () => {
     request
       .post( '/api/auth/signup' )
       .send( userAdmin )
-      .then( res => assert.ok( tokenAdmin = res.body.token ))
-      .then(done)
+      .then( res => {
+        assert.ok( tokenAdmin = res.body.token );
+        assert.ok(userAdmin.userId = res.body.userId);
+        done();
+      })
       .catch(done);
   });
 
