@@ -13,17 +13,17 @@
       <!-- --------------- thread template ------------------------- -->
     <script id="thread-template" type="text/x-handlebars-template">
       {{#each thread}}
-        <article data-threadId="{{threadId}}" data-userId="{{userId}}">
+        <article data-threadId="{{_id}}" data-userId="{{userId}}">
           <h3>{{title}}</h3>
           <div>{{text}}</div>
           <div>{{username}}</div>
           <div class="thread-content">
-            <button name="add-remark">Add Remark</button>
-            <button name="follow-user">Follow User</button>
-            <button name="follow-thread">Follow Thread</button>
-            <button name="edit-post">Edit Post</button>
-            <button name="delete-thread">Delete Thread</button>
-            <button name="create-thread">Create New Thread</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="add-remark">Add Remark</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-user">Follow User</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
           </div>
         </article>
         
