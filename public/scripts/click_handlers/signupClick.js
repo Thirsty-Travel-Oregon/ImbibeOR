@@ -1,4 +1,3 @@
-
 $('#signup-form').submit(function(event) {
   event.preventDefault();
   var submitData = $( this ).serializeArray();
