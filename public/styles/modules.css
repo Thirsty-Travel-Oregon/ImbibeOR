@@ -30,6 +30,12 @@ nav {
   justify-content: center;
 }
 
+.img-link img:hover{
+  cursor:pointer;
+  -webkit-transform: scale(1.2);
+	transform: scale(1.2);
+}
+
 .drink-type-cat {
   margin-right: 0.5rem;
 }
