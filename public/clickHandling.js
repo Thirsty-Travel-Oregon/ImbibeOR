@@ -2,15 +2,17 @@
 //all get requests
 $('area').on('click', function(e) {
   e.preventDefault();
+  $('#thread-container').empty();
   var regionClicked = $(this).attr('id');
   console.log(regionClicked);
   superagent
     .get(`/api/threads/region/${regionClicked}`)
     .then((res) => {
-      console.log(res);
-      //do something with the response
-      //append them to
-      $('thread-container').append(res.body);
+      const source = $('#thread-template').html();
+      const template = Handlebars.compile(source);
+      const threadObject = {thread: res.body};
+      const newHtml = template(threadObject);
+      $('#thread-container').append(newHtml);
     })
     .catch((err) => {
       console.log(err);
@@ -36,7 +38,7 @@ $('.drink-type-cat li').on('click', function(e) {
     });
 });
 
-$('.thread-content button').on('click', function(e) {
+$('#thread-container').on('click', 'button', function(e) {
   e.preventDefault();
   var threadButtonClicked = $(this).attr('name');
   console.log(threadButtonClicked);
