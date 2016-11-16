@@ -4,10 +4,11 @@
   signupController.reveal = function() {
     console.log('signup controller triggered.');
     $('.content').not('#signup-page').hide();
+    $('.thread-content').hide();
+    $('.remark-content').hide();
     $('#signup-page').fadeIn();
-    // $('#home-page').fadeIn();
-    // $('.link a').css({color:'white'});
-    // $('#home-link').css({color:'grey'});
+    $('.link a').fadeIn();
+    $('#signup-link').hide();
   };
 
   module.signupController = signupController;
