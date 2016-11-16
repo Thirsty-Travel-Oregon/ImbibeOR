@@ -16,7 +16,6 @@ $('#login-form').submit(function(event) {
       $('#login-form').append('<p>Your token is <em>'+token+'</em></p>');
       sessionStorage.setItem('storedToken', token);
       sessionStorage.setItem('storedUserID', res.body.userId);
-      console.log('user ID stored as ', sessionStorage.getItem('storedUserID'));
     })
     .catch((err) => {
       console.log(err);
