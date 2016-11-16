@@ -116,9 +116,9 @@ describe('user routing', () => {
       .get(`/api/users/${testUser._id}`)
       .set('authorization', `Bearer ${adminToken}`)
       .then(res => {
-        assert.equal(res.body.username, testUser.username)
+        assert.equal(res.body.username, testUser.username);
         done();
       })
       .catch(done);
-  })
+  });
 });
