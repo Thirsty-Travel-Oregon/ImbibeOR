@@ -44,11 +44,13 @@ $('.drink-type-cat li').on('click', function(e) {
 //buttons for the threads
 $('#thread-container').on('click', 'button', function(e) {
   e.preventDefault();
-  let id = sessionStorage.getItem('storedUserID');
-  let token = 'Bearer ' + sessionStorage.getItem('storedToken');
-  var threadButtonClicked = $(this).attr('name');
-  console.log('target?', e.target);
+  const id = sessionStorage.getItem('storedUserID');
+  const token = 'Bearer ' + sessionStorage.getItem('storedToken');
+  const threadButtonClicked = $(this).attr('name');
   console.log('id', id);
+
+  const userIdMarker = e.target.getAttribute('data-userId');
+  console.log('idmarker', userIdMarker);
 
   console.log('button clicked', threadButtonClicked);
 
@@ -64,19 +66,21 @@ $('#thread-container').on('click', 'button', function(e) {
       });
   }else if (threadButtonClicked === 'follow-user') {
     superagent
-      .post(`/api/users/followUser/${id}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', token)
-      .send('{"userId": data-userId}')
+      .put(`/api/users/followUser/${userIdMarker}`)
+      .set({'Content-Type': 'application/json'})
+      .set({'Authorization': token})
+      .send('{"userId": id}')
       .then(() => {
       })
       .catch((err) => {
         console.log(err);
       });
   }else if (threadButtonClicked === 'follow-thread') {
-    
     superagent
-      .post(`/api/users/followThread/${marker}`)
+      .put(`/api/users/followThread/${userIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send('{"userId": id}')
       .then((res) => {
       })
       .catch((err) => {
