@@ -79,7 +79,7 @@ $('.thread-content button').on('click', function(e) {
   }
 
   function makeAjaxCall(name) {
-      superagent
+    superagent
     .get(`/api/${name}`)
     .then((res) => {
       console.log(res);
