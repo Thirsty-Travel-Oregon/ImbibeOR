@@ -63,22 +63,23 @@
           <li class="link"><a href="logout" id="logout-link">Log Out</a></li>
         </ul>
       </nav>
+      <p id="user-status">Not logged in</p>
 
       <!-- --------------- login ------------------------- -->
       <div class="content" id="login-page">
-        <h2>Log In</h2>
+        <h2 id="login-header">Log In</h2>
         <form id="login-form">
           Username:<br>
           <input type="text" name="username"><br>
           Password:<br>
-          <input type="text" name="password"><br><br>
+          <input type="password" name="password"><br><br>
           <input type="submit" value="Login" class="submit">
         </form>
       </div>
 
       <!-- ----------------- sign up ----------------------- -->
       <div class="content" id="signup-page">
-        <h2>Sign Up</h2>
+        <h2 id ='signup-header'>Sign Up</h2>
         <form id="signup-form">
           Name:<br>
           <input type="text" name="name"><br>
@@ -200,7 +201,6 @@
         <h3 >Threads</h3>
         <h4 id='following-threads-tag'>You are following these users:</h4>
         <br>
-
       </div>
 
 

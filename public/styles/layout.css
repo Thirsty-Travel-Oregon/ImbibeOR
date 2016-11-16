@@ -3,6 +3,12 @@
   color: white;
 }
 
+#footer {
+  background-color: black;
+  color: white;
+  min-height: 20vh;
+}
+
 #imbibe-logo {
   max-width: 8vw;
   display: inline-block;
