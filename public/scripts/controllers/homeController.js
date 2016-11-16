@@ -7,6 +7,7 @@
     $('.thread-content').fadeIn();
     $('.remark-content').fadeIn();
     $('#flexcontainer').fadeIn();
+    $('#thread-container').fadeIn();
     $('#view-threads').fadeIn();
     $('#view-remarks').fadeIn();
     $('.link a').fadeIn();

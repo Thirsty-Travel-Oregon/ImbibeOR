@@ -23,30 +23,44 @@ $('area').on('click', function(e) {
 //all get requests
 $('.drink-type-cat li').on('click', function(e) {
   e.preventDefault();
+  $('#thread-container').empty();
   var drinkTypeClicked = $(this).attr('id');
   console.log(drinkTypeClicked);
   superagent
     .get(`/api/threads/drinkType/${drinkTypeClicked}`)
     .then((res) => {
-      console.log(res);
-      //do something with the response
-      //append them to
-      $('thread-container').append(res.body);
+      console.log(res.body);
+      const source = $('#thread-template').html();
+      const template = Handlebars.compile(source);
+      const threadObject = {thread: res.body};
+      const newHtml = template(threadObject);
+      $('#thread-container').append(newHtml);
     })
     .catch((err) => {
       console.log(err);
     });
 });
 
+//buttons for the threads
 $('#thread-container').on('click', 'button', function(e) {
   e.preventDefault();
-  var threadButtonClicked = $(this).attr('name');
-  console.log(threadButtonClicked);
+  const id = sessionStorage.getItem('storedUserID');
+  const token = 'Bearer ' + sessionStorage.getItem('storedToken');
+  const threadButtonClicked = $(this).attr('name');
+  console.log('id', id);
+
+  const userIdMarker = e.target.getAttribute('data-userId');
+  console.log('userIdMarker', userIdMarker);
+  const threadIdMarker = e.target.getAttribute('data-threadId');
+  console.log('threadIdMarker', threadIdMarker);
+
+  console.log('button clicked', threadButtonClicked);
+
   if (threadButtonClicked === 'add-remark') {
     superagent
       .get(`/api/${name}`)
       .then((res) => {
-        console.log(res);
+        console.log('res', res);
         //do something with the response
       })
       .catch((err) => {
@@ -54,42 +68,42 @@ $('#thread-container').on('click', 'button', function(e) {
       });
   }else if (threadButtonClicked === 'follow-user') {
     superagent
-      .get(`/api/${name}`)
-      .then((res) => {
-        console.log(res);
-        //do something with the response
+      .put(`/api/users/followUser/${userIdMarker}`)
+      .set({'Content-Type': 'application/json'})
+      .set({'Authorization': token})
+      .send({userId: id})
+      .then(() => {
       })
       .catch((err) => {
         console.log(err);
       });
   }else if (threadButtonClicked === 'follow-thread') {
     superagent
-      .get(`/api/${name}`)
+      .put(`/api/users/followThread/${userIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send({threadId: threadIdMarker
+      })
       .then((res) => {
-        console.log(res);
-        //do something with the response
       })
       .catch((err) => {
         console.log(err);
       });
   }else if (threadButtonClicked === 'edit-post') {
-
+    //how to do this???
   }else if (threadButtonClicked === 'delete-thread') {
-
-  }else if (threadButtonClicked === 'create-thread') {
-
-  }
-
-  function makeAjaxCall(name) {
     superagent
-    .get(`/api/${name}`)
-    .then((res) => {
-      console.log(res);
-      //do something with the response
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .put(`/api/users/followThread/${userIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send({threadId: threadIdMarker})
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }else if (threadButtonClicked === 'create-thread') {
+    location.href = '/add-thread';
   }
 
 });

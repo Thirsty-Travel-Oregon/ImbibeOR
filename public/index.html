@@ -13,17 +13,17 @@
       <!-- --------------- thread template ------------------------- -->
     <script id="thread-template" type="text/x-handlebars-template">
       {{#each thread}}
-        <article data-id="{{threadId}}">
+        <article data-threadId="{{_id}}" data-userId="{{userId}}">
           <h3>{{title}}</h3>
           <div>{{text}}</div>
           <div>{{username}}</div>
           <div class="thread-content">
-            <button name="add-remark">Add Remark</button>
-            <button name="follow-user">Follow User</button>
-            <button name="follow-thread">Follow Thread</button>
-            <button name="edit-post">Edit Post</button>
-            <button name="delete-thread">Delete Thread</button>
-            <button name="create-thread">Create New Thread</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="add-remark">Add Remark</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-user">Follow User</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
+            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
           </div>
         </article>
         
@@ -123,11 +123,11 @@
 
       <!-- ------------------ drink type categories ---------------------- -->
         <ul class="drink-type-cat">
-          <li class="img-link" id="beer-cat"><a href="#"><img src="./assets/beer-button.png" alt="BEER"></img></a></li>
-          <li class="img-link" id="wine-cat"><a href="#"><img src="./assets/wine-button.png" alt="WINE"></img></a></li>
-          <li class="img-link" id="spirits-cat"><a href="#"><img src="./assets/spirits-button.png" alt="SPIRITS"></img></a></li>
-          <li class="img-link" id="other-cat"><a href="#"><img src="./assets/other-button.png" alt="OTHER"></img></a></li>
-          <li class="img-link" id="all-cat"><a href="#"><img src="./assets/all-button.png" alt="ALL"></img></a></li>
+          <li class="img-link" id="beer"><a href="#"><img src="./assets/beer-button.png" alt="BEER"></img></a></li>
+          <li class="img-link" id="wine"><a href="#"><img src="./assets/wine-button.png" alt="WINE"></img></a></li>
+          <li class="img-link" id="spirits"><a href="#"><img src="./assets/spirits-button.png" alt="SPIRITS"></img></a></li>
+          <li class="img-link" id="other"><a href="#"><img src="./assets/other-button.png" alt="OTHER"></img></a></li>
+          <li class="img-link" id="all"><a href="#"><img src="./assets/all-button.png" alt="ALL"></img></a></li>
         </ul>
     </div>
 
@@ -137,11 +137,10 @@
       <form id="add-thread-form">
         <!-- add thread dropdowns and input fields here. -->
         <select class ="thread-select" id="drink-type-select">
-          <option value="Beer">Beer</option>
-          <option value="Wine">Wine</option>
-          <option value="Spirits">Spirits</option>
-          <option value="Other">Other</option>
-          <option value="All">All</option>
+          <option value="beer">Beer</option>
+          <option value="wine">Wine</option>
+          <option value="spirits">Spirits</option>
+          <option value="other">Other</option>
         </select>
         <select class ="thread-select" id="region-select">
           <option value="portland">Portland</option>
@@ -158,9 +157,9 @@
         </select>
         <br>
         Thread Title<br>
-        <input type="text" value="Thread Title"><br>
+        <input type="text" name="Thread Title"><br>
         Text<br>
-        <textarea value="Thread Text"rows="6" cols="80"></textarea>
+        <textarea name="Thread Text"rows="6" cols="80"></textarea>
 
         <input type="submit" value="Add Thread" class="submit">
       </form>
@@ -176,7 +175,7 @@
     </div>
 
 <!-- ----------------- view thread ----------------------- -->
-    <div id="thread-container"></div>
+    <div class="content" id="thread-container"></div>
 
 <!-- ----------------- view remark ----------------------- -->
 
@@ -206,15 +205,15 @@
     <!-- View Files -->
 
     <!-- Controller Files -->
-   
-       <script type="text/javascript" src="scripts/controllers/loginClick.js"></script>
-         <script type="text/javascript" src="scripts/controllers/signupClick.js"></script>
-      <script type="text/javascript" src="scripts/controllers/homeController.js"></script>
-      <script type="text/javascript" src="scripts/controllers/signupController.js"></script>
-      <script type="text/javascript" src="scripts/controllers/loginController.js"></script>
-      <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
-      <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>
-      <script type="text/javascript" src="scripts/controllers/routes.js"></script>
+    <script type="text/javascript" src="scripts/controllers/addThreadClick.js"></script>
+    <script type="text/javascript" src="scripts/controllers/loginClick.js"></script>
+    <script type="text/javascript" src="scripts/controllers/signupClick.js"></script>
+    <script type="text/javascript" src="scripts/controllers/homeController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/signupController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/loginController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/routes.js"></script>
 
     
   </body>
