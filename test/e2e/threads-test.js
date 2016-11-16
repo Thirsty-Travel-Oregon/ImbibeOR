@@ -12,7 +12,6 @@ const connection = require('../../lib/mongoose-config');
 const app = require('../../lib/app');
 
 describe('Thread Tests: ', () => {
-  const request = chai.request(app);
 
   before( done => {
     const CONNECTED = 1;
@@ -30,63 +29,15 @@ describe('Thread Tests: ', () => {
     }
   });
 
-  const userAdmin = {
-    username: 'Test Admin',
-    password: 'AdminPWD',
-    roles: ['admin']
-  };
-
-  const userModerator = {
-    username: 'Test Moderator',
-    password: 'ModeratorPWD',
-    roles: ['moderator']
-  };
-
-  const userBasic = {
-    username: 'Test Basic',
-    password: 'BasicPWD',
-    roles: ['basic']
-  };
-
-  let tokenAdmin = '',
-    tokenModerator = '',
-    tokenBasic = '';
-
-  before( done => {
-    request
-      .post( '/api/auth/signup' )
-      .send( userAdmin )
-      .then( res => assert.ok( tokenAdmin = res.body.token ))
-      .then( done )
-      .catch(done);
-  });
-
-  before( done => {
-    request
-      .post( '/api/auth/signup' )
-      .send( userModerator )
-      .then( res => assert.ok( tokenModerator = res.body.token ) )
-      .then( done )
-      .catch(done);
-  });
-
-  before( done => {
-    request
-      .post( '/api/auth/signup' )
-      .send( userBasic )
-      .then( res => assert.ok( tokenBasic = res.body.token ) )
-      .then( done )
-      .catch(done);
-  });
-
   it('GET all without token', done => {
     request
       .get('/api/threads')
-      .then( res => {
-        assert.deepEqual(res.body, []);
+      .then( res => done( 'status should not be 200' ) )
+      .catch( res => {
+        assert.equal( res.status, 400 );
+        assert.equal( res.response.body.error, 'unauthorized, no token provided' );
         done();
-      })
-      .catch(done);
+      });
   });
 
   it('GET all with token', done => {

@@ -4,12 +4,7 @@
 }
 
 #imbibe-logo {
-  max-width: 8vw;
+  max-width: 10vw;
   display: inline-block;
-  padding: 1vh;
-}
-
-#thread-container {
-  width: 75%;
-  background-color: gold;
+  padding: 2vh;
 }
