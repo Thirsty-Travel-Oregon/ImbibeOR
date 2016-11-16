@@ -9,6 +9,41 @@
     <link rel="stylesheet" type="text/css" href="styles/modules.css">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
     <title>Imbibe OR</title>
+
+      <!-- --------------- thread template ------------------------- -->
+    <script id="thread-template" type="text/x-handlebars-template">
+      {{#each thread}}
+        <article data-id="{{threadId}}">
+          <h3>{{title}}</h3>
+          <div>{{text}}</div>
+          <div>{{username}}</div>
+          <div class="thread-content">
+            <button name="add-remark">Add Remark</button>
+            <button name="follow-user">Follow User</button>
+            <button name="follow-thread">Follow Thread</button>
+            <button name="edit-post">Edit Post</button>
+            <button name="delete-thread">Delete Thread</button>
+            <button name="create-thread">Create New Thread</button>
+          </div>
+        </article>
+        
+        {{#each remark}}
+          <div class="remark-content" id="view-remarks">
+            {{text}}
+            <div>{{username}}</div>
+            <div class="remark-content">
+              <button name="add-remark">Add Remark</button>
+              <button name="follow-user">Follow User</button>
+              <button name="edit-remark">Edit Remark</button>
+              <button name="delete-remark">Delete Remark</button>
+              <button name="create-thread">Create New Thread</button>
+            </div>
+          </div>
+        {{/each}}
+
+      {{/each}}
+    </script>
+
   </head>
   <body>
     <div class="static" id="header">
@@ -141,29 +176,9 @@
     </div>
 
 <!-- ----------------- view thread ----------------------- -->
-    <div class="thread-content" id="view-threads">
-      <div>title</div>
-      <div>text</div>
-      <div>username</div>
-      <div id="thread-container"></div>
-      <button name="add-remark" id="add-remark" >Add Remark</button>
-      <button name="follow-user" id="follow-user">Follow User</button>
-      <button name="follow-thread" id="follow-thread">Follow Thread</button>
-      <button name="edit-post" id="edit-post">Edit Post</button>
-      <button name="delete-thread" id="delete-thread">Delete Thread</button>
-      <button name="create-thread" href="add-thread">Create New Thread</button>
-    </div>
+    <div id="thread-container"></div>
 
 <!-- ----------------- view remark ----------------------- -->
-    <div class="remark-content" id="view-remarks">
-      <div>text</div>
-      <div>username</div>
-      <button name="add-remark" id="add-remark">Add Remark</button>
-      <button name="follow-user" id="follow-user">Follow User</button>
-      <button name="edit-remark" id="edit-remark">Edit Remark</button>
-      <button name="delete-remark" id="delete-remark">Delete Remark</button>
-      <button name="create-thread" href="/add-thread">Create New Thread</button>
-    </div>
 
 <!-- ------------------ about ---------------------- -->
     <div class="content" id="about-page">
@@ -186,6 +201,7 @@
 
     <!-- Model Files -->
    <script type="text/javascript" src="clickHandling.js"></script>
+   <script type="text/javascript" src="vendor/handlebars.js"></script>
 
     <!-- View Files -->
 
