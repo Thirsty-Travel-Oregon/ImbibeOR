@@ -15,6 +15,12 @@ $('#thread-container').on('click', 'button', function(e) {
   const threadIdMarker = e.target.getAttribute('data-threadId');
   console.log('threadIdMarker', threadIdMarker);
 
+  const remarkIdMarker = e.target.getAttribute('data-remId');
+  console.log('remarkIdMarker', remarkIdMarker);
+
+  const remOwnerIdMarker = e.target.getAttribute('data-userId');
+  console.log('remOwnerIdMarker', remOwnerIdMarker);
+
 
   if (threadButtonClicked === 'add-remark') {
     superagent
@@ -52,13 +58,48 @@ $('#thread-container').on('click', 'button', function(e) {
         console.log(err);
       });
   }else if (threadButtonClicked === 'edit-post') {
-    //how to do this???
-  }else if (threadButtonClicked === 'delete-thread') {
+    //way not done yet!
     superagent
-      .put(`/api/users/followThread/${userIdMarker}`)
+      .put(`/api/threads/${threadIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      .send({threadId: threadIdMarker})
+      .then(() => {
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }else if (threadButtonClicked === 'edit-remark') {
+    //still way not done!
+    superagent
+      .put(`/api/threads/${remarkIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .then(() => {
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }else if (threadButtonClicked === 'delete-thread') {
+    //don't think this is done?
+    superagent
+      .delete(`/api/users/followThread/${userIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send({threadId: threadIdMarker, userId: threadOwnerIdMarker})
+      .then((res) => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }else if (threadButtonClicked === 'delete-remark') {
+    //don't think this is done?
+    superagent
+      .delete(`/api/users/followThread/${userIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send({threadId: threadIdMarker, userId: remOwnerIdMarker})
       .then((res) => {
       })
       .catch((err) => {
@@ -68,10 +109,4 @@ $('#thread-container').on('click', 'button', function(e) {
     location.href = '/add-thread';
   }
 
-});
-
-$('.remark-content button').on('click', function(e) {
-  e.preventDefault();
-  var remarkButtonClicked = $(this).attr('name');
-  console.log(remarkButtonClicked);
 });
