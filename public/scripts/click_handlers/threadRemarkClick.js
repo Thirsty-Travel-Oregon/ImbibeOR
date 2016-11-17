@@ -40,6 +40,7 @@ $('#thread-container').on('click', 'button', function(e) {
           superagent
             .get(`/api/threads/${threadIdMarker}`)
             .set('Authorization', token)
+            .send({currUser: sessionStorage.getItem('storedUserID')})
             .then(res => {
               const source = $('#thread-template').html();
               const template = Handlebars.compile(source);

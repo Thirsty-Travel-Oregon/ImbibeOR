@@ -19,6 +19,7 @@ $('area').on('click', function(e) {
 
       if (!sessionStorage.getItem('storedToken')) {
         $('#thread-container button').hide();
+        $('#remark-buttons button').hide();
       }
     })
     .catch((err) => {
