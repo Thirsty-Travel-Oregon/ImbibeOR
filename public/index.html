@@ -10,7 +10,17 @@
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
     <title>Imbibe OR</title>
 
-      <!-- --------------- thread template ------------------------- -->
+     <!----------------- thread title template -------------------- 
+    <script id="thread-title-template" type="text/x-handlebars-template">
+      {{#each thread}}
+        <article>
+        <a href="/titles"  {{title}}</h2>
+        </article>
+      {{/each}}
+    </script>-->
+
+
+    <!-- --------------- full thread template --------------------- -->
     <script id="thread-template" type="text/x-handlebars-template">
       {{#each thread}}
         <article data-threadId="{{_id}}" data-userId="{{userId}}">
@@ -18,7 +28,10 @@
           <div>{{text}}</div>
           <div>{{username}}</div>
           <div class="thread-content">
+            
+            
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="add-remark">Add Remark</button>
+
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-user">Follow User</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
