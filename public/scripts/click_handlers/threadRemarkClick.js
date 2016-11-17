@@ -17,17 +17,17 @@ $('#thread-container').on('click', 'button', function(e) {
 
 
   if (threadButtonClicked === 'add-remark') {
-    console.log('button is being clicked');
     $('#add-remark').fadeIn();
     $('#add-remark-form').submit(event => {
       event.preventDefault();
-      let submitData = $(this).serializeArray();
+      let submitData = $('textarea[name="Remark Text"]').val();
       const submitObj = {
-        text: submitData[0].value,
+        text: submitData,
         threadId: threadIdMarker,
         userId: currUserId
       };
       let jsonData = JSON.stringify(submitObj);
+      console.log('jsondata', jsonData);
       superagent
         .post('/api/remarks/')
         .set('Content-Type', 'application/json')
