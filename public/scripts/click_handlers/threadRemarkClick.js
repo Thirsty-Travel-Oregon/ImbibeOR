@@ -60,6 +60,9 @@ $('#thread-container').on('click', 'button', function(e) {
               $('#thread-container').append(newHtml);
             });
         })
+        .then(() => {
+          location.href = '/';
+        })
         .catch(err => {
           console.log(err);
         });
@@ -117,7 +120,8 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: threadOwnerIdMarker})
-      .then((res) => {
+      .then(() => {
+        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
@@ -129,7 +133,8 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: remOwnerIdMarker})
-      .then((res) => {
+      .then(() => {
+        location.href = '/';
       })
       .catch((err) => {
         console.log(err);

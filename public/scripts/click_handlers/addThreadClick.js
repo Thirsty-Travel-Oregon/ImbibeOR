@@ -25,6 +25,9 @@ $('#add-thread-form').submit(function(event) {
         .then((res) => {
           $('#add-thread-form').append('<h3>New thread, <em>'+submitObj.title+'</em> added to the '+submitObj.region+' region.</h3>');
         })
+        .then(() => {
+          location.href = '/';
+        })
         .catch((err) => {
           console.log(err);
         });
