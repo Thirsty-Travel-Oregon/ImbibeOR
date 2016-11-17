@@ -17,13 +17,13 @@ $('#thread-container').on('click', 'button', function(e) {
 
 
   if (threadButtonClicked === 'add-remark') {
-    console.log('button is being clicked');
     $('#add-remark').fadeIn();
     $('#add-remark-form').submit(event => {
       event.preventDefault();
-      let submitData = $(this).serializeArray();
+      $('#thread-container').empty();
+      let submitData = $('textarea[name="Remark Text"]').val();
       const submitObj = {
-        text: submitData[0].value,
+        text: submitData,
         threadId: threadIdMarker,
         userId: currUserId
       };
@@ -35,6 +35,24 @@ $('#thread-container').on('click', 'button', function(e) {
         .send(jsonData)
         .then(res => {
           $('#add-remark').hide();
+          // console.log('resbod', res.body);
+          superagent
+            // .get(`/api/threads/${res.body.threadId}`)
+            .get('/api/threads')
+            .set('Authorization', token)
+            .then(res => {
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              // let remarksArr = res.body.remarks;
+              // let remarkObj = {};
+              // for(let i = 0; i < remarksArr.length; i++) {
+              //   remarkObj['remark' + (i + 1) + ''] = remarksArr[i].text;
+              // }
+              // console.log('remarkobj', remarkObj);
+              let threadObj = {thread: res.body};
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
         })
         .catch(err => {
           console.log(err);
