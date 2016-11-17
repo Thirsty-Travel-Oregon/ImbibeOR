@@ -9,32 +9,46 @@ $('#thread-container').on('click', 'button', function(e) {
   const currUserId = sessionStorage.getItem('storedUserID');
   console.log('currUserId', currUserId);
 
+  const username = sessionStorage.getItem('storedUsername');
   const threadOwnerIdMarker = e.target.getAttribute('data-userId');
-  console.log('threadOwnerIdMarker', threadOwnerIdMarker);
-
   const threadIdMarker = e.target.getAttribute('data-threadId');
-  console.log('threadIdMarker', threadIdMarker);
-
+  const remarkIdMarker = e.target.getAttribute('data-remId');
+  const remOwnerIdMarker = e.target.getAttribute('data-userId');
 
   if (threadButtonClicked === 'add-remark') {
-    console.log('button is being clicked');
     $('#add-remark').fadeIn();
     $('#add-remark-form').submit(event => {
       event.preventDefault();
-      let submitData = $(this).serializeArray();
+      $('#thread-container').empty();
+      let submitData = $('textarea[name="Remark Text"]').val();
       const submitObj = {
-        text: submitData[0].value,
+        text: submitData,
         threadId: threadIdMarker,
-        userId: currUserId
+        userId: currUserId,
+        username: username
       };
       let jsonData = JSON.stringify(submitObj);
+      console.log('jsondata', jsonData);
       superagent
         .post('/api/remarks/')
         .set('Content-Type', 'application/json')
         .set('Authorization', token)
         .send(jsonData)
-        .then(res => {
+        .then((res) => {
           $('#add-remark').hide();
+          console.log('thread Id Marker', threadIdMarker);
+          superagent
+            .get(`/api/threads/${threadIdMarker}`)
+            .set('Authorization', token)
+            .send({currUser: sessionStorage.getItem('storedUserID')})
+            .then(res => {
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              let threadObj = {thread: res.body};
+              console.log('res body', res.body);
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
         })
         .catch(err => {
           console.log(err);
@@ -66,13 +80,38 @@ $('#thread-container').on('click', 'button', function(e) {
     const threadIdMarker = e.target.getAttribute('data-threadId');
     editThreadClick(threadIdMarker);
 
-  }else if (threadButtonClicked === 'delete-thread') {
+  }else if (threadButtonClicked === 'edit-remark') {
+    //still way not done!
     superagent
-      .put(`/api/users/followThread/${userIdMarker}`)
+      .put(`/api/threads/${remarkIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      .send({threadId: threadIdMarker})
-      .then((res) => {
+      .then(() => {
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }else if (threadButtonClicked === 'delete-thread') {
+    superagent
+      .delete(`/api/threads/${threadIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send({threadId: threadIdMarker, userId: threadOwnerIdMarker})
+      .then(() => {
+        location.href = '/';
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }else if (threadButtonClicked === 'delete-remark') {
+    superagent
+      .delete(`/api/remarks/${remarkIdMarker}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', token)
+      .send({threadId: threadIdMarker, userId: remOwnerIdMarker})
+      .then(() => {
+        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
@@ -81,10 +120,4 @@ $('#thread-container').on('click', 'button', function(e) {
     location.href = '/add-thread';
   }
 
-});
-
-$('.remark-content button').on('click', function(e) {
-  e.preventDefault();
-  var remarkButtonClicked = $(this).attr('name');
-  console.log(remarkButtonClicked);
 });

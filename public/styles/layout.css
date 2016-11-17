@@ -18,4 +18,19 @@
 #thread-container {
   width: 75%;
   background-color: gold;
+  border-radius: 1rem;
+}
+
+.one-thread {
+  padding-left: 1rem;
+  border: groove 0.5rem red;  
+  border-radius: 1rem;
+  margin: 0.25rem 0;
+}
+
+.remark-content {
+  padding-left: 0.25rem;
+  margin-left: 2rem;
+  border: groove 0.5rem red;  
+  border-radius: 1rem;
 }

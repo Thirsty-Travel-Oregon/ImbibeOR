@@ -11,7 +11,8 @@ $('#add-thread-form').submit(function(event) {
       text: submitData[1].value,
       region: document.getElementById('region-select').value,
       drinkType: document.getElementById('drink-type-select').value,
-      userId: userId
+      userId: userId,
+      username: sessionStorage.getItem('storedUsername')
     };
     jsonData = JSON.stringify(submitObj);
     var token ='Bearer ' +sessionStorage.getItem('storedToken')+'';
@@ -23,6 +24,9 @@ $('#add-thread-form').submit(function(event) {
         .send(jsonData)
         .then((res) => {
           $('#add-thread-form').append('<h3>New thread, <em>'+submitObj.title+'</em> added to the '+submitObj.region+' region.</h3>');
+        })
+        .then(() => {
+          location.href = '/';
         })
         .catch((err) => {
           console.log(err);
