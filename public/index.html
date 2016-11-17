@@ -36,10 +36,10 @@
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
 
-            <!--{{#if thread.isOwner}}-->
+            {{#if isOwner}}
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
-            <!--{{/if}}-->
+            {{/if}}
 
           </div>
         </article>
@@ -53,7 +53,7 @@
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="follow-user-rem">Follow User</button>
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="create-thread-rem">Create New Thread</button>
 
-              {{#if remarks.isOwner}}
+              {{#if isOwner}}
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="edit-remark">Edit Remark</button>
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="delete-remark">Delete Remark</button>
               {{/if}}
