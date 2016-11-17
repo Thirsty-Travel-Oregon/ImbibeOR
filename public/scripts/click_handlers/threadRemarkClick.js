@@ -62,6 +62,9 @@ $('#thread-container').on('click', 'button', function(e) {
               $('#thread-container').append(newHtml);
             });
         })
+        .then(() => {
+          location.href = '/';
+        })
         .catch(err => {
           console.log(err);
         });
@@ -115,11 +118,12 @@ $('#thread-container').on('click', 'button', function(e) {
   }else if (threadButtonClicked === 'delete-thread') {
     //don't think this is done?
     superagent
-      .delete(`/api/users/followThread/${userIdMarker}`)
+      .delete(`/api/threads/${threadIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: threadOwnerIdMarker})
-      .then((res) => {
+      .then(() => {
+        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
@@ -127,11 +131,12 @@ $('#thread-container').on('click', 'button', function(e) {
   }else if (threadButtonClicked === 'delete-remark') {
     //don't think this is done?
     superagent
-      .delete(`/api/users/followThread/${userIdMarker}`)
+      .delete(`/api/remarks/${remarkIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: remOwnerIdMarker})
-      .then((res) => {
+      .then(() => {
+        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
