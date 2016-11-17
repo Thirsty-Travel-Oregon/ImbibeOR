@@ -186,11 +186,19 @@
         <input type="submit" value="Add Thread" class="submit">
       </form>
     </div>
-
+<!-- ------------------ edit thread ---------------------- -->
+    <div class="content" id="edit-thread">
+      <h2 id='edit-thread-header'>Edit Thread: </h2>
+      <h2 id='edit-thread-title'></h2>
+      <form id="edit-thread-form">
+        <textarea id='edit-thread-textarea' rows="6" cols="80">Thread Text can be edited</textarea>
+        <input type="submit" value="Save Edit" class="submit">
+      </form>
+    </div>
 <!-- ------------------ add remark ---------------------- -->
     <div class="content" id="add-remark">
       <h2>Add New Remark</h2>
-      <form id="add-remark-form" method="post">>
+      <form id="add-remark-form" method="post">
         <textarea value="Thread Text"rows="6" cols="80"></textarea>
         <input type="submit" value="Add Remark" class="submit">
       </form>
@@ -234,6 +242,7 @@
     <script type="text/javascript" src="vendor/handlebars.js"></script>
 
     <!-- Click Handlers Files -->
+    <script type="text/javascript" src="scripts/click_handlers/editThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/addThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/loginClick.js"></script>
     <script type="text/javascript" src="scripts/controllers/logoutClick.js"></script>

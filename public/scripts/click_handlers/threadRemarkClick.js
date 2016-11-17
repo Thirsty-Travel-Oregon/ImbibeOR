@@ -63,7 +63,9 @@ $('#thread-container').on('click', 'button', function(e) {
         console.log(err);
       });
   }else if (threadButtonClicked === 'edit-post') {
-    //how to do this???
+    const threadIdMarker = e.target.getAttribute('data-threadId');
+    editThreadClick(threadIdMarker);
+
   }else if (threadButtonClicked === 'delete-thread') {
     superagent
       .put(`/api/users/followThread/${userIdMarker}`)
