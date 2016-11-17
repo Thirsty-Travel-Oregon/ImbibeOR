@@ -21,6 +21,9 @@ $('#login-form').submit(function(event) {
       $('#login-link').hide();
       $('#logout-link').fadeIn();
     })
+    .then(() => {
+      location.href = '/';
+    })
     .catch((err) => {
       console.log(err);
     });

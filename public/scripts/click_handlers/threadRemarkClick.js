@@ -10,19 +10,10 @@ $('#thread-container').on('click', 'button', function(e) {
   console.log('currUserId', currUserId);
 
   const username = sessionStorage.getItem('storedUsername');
-
   const threadOwnerIdMarker = e.target.getAttribute('data-userId');
-  console.log('threadOwnerIdMarker', threadOwnerIdMarker);
-
   const threadIdMarker = e.target.getAttribute('data-threadId');
-  console.log('threadIdMarker', threadIdMarker);
-
   const remarkIdMarker = e.target.getAttribute('data-remId');
-  console.log('remarkIdMarker', remarkIdMarker);
-
   const remOwnerIdMarker = e.target.getAttribute('data-userId');
-  console.log('remOwnerIdMarker', remOwnerIdMarker);
-
 
   if (threadButtonClicked === 'add-remark') {
     $('#add-remark').fadeIn();
@@ -43,32 +34,21 @@ $('#thread-container').on('click', 'button', function(e) {
         .set('Content-Type', 'application/json')
         .set('Authorization', token)
         .send(jsonData)
-        .then(res => {
+        .then((res) => {
           $('#add-remark').hide();
-          console.log('first resbod', res.body);
+          console.log('thread Id Marker', threadIdMarker);
           superagent
-            // .get(`/api/threads/${res.body.threadId}`)
-            .get('/api/threads')
+            .get(`/api/threads/${threadIdMarker}`)
             .set('Authorization', token)
             .then(res => {
-              console.log('second resbod', res.body);
               const source = $('#thread-template').html();
               const template = Handlebars.compile(source);
-              // let remarksArr = res.body.remarks;
-              // let remarkObj = {};
-              // for(let i = 0; i < remarksArr.length; i++) {
-              //   remarkObj['remark' + (i + 1) + ''] = remarksArr[i].text;
-              // }
-              // console.log('remarkobj', remarkObj);
               let threadObj = {thread: res.body};
-              console.log('threadObj', threadObj);
+              console.log('res body', res.body);
               const newHtml = template(threadObj);
               $('#thread-container').append(newHtml);
             });
         })
-        // .then(() => {
-        //   location.href = '/';
-        // })
         .catch(err => {
           console.log(err);
         });
@@ -120,7 +100,6 @@ $('#thread-container').on('click', 'button', function(e) {
         console.log(err);
       });
   }else if (threadButtonClicked === 'delete-thread') {
-    //don't think this is done?
     superagent
       .delete(`/api/threads/${threadIdMarker}`)
       .set('Content-Type', 'application/json')
@@ -133,7 +112,6 @@ $('#thread-container').on('click', 'button', function(e) {
         console.log(err);
       });
   }else if (threadButtonClicked === 'delete-remark') {
-    //don't think this is done?
     superagent
       .delete(`/api/remarks/${remarkIdMarker}`)
       .set('Content-Type', 'application/json')
