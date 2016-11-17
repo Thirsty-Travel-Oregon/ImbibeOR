@@ -8,7 +8,7 @@ $('area').on('click', function(e) {
     .get(`/api/threads/region/${regionClicked}`)
     .send({currUser: sessionStorage.getItem('storedUserID')})
     .then((res) => {
-      console.log(res);
+      console.log('final threads?', res);
       const source = $('#thread-template').html();
       const template = Handlebars.compile(source);
       const threadObject = {
