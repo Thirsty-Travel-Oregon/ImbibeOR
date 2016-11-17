@@ -10,50 +10,57 @@
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
     <title>Imbibe OR</title>
 
-     <!----------------- thread title template -------------------- 
+    <!----------------- thread title template -------------------- -->
+    <!-- post MVP -->
+    <!-- 
     <script id="thread-title-template" type="text/x-handlebars-template">
       {{#each thread}}
         <article>
         <a href="/titles"  {{title}}</h2>
         </article>
       {{/each}}
-    </script>-->
-
+    </script>
+    -->
 
     <!-- --------------- full thread template --------------------- -->
     <script id="thread-template" type="text/x-handlebars-template">
       {{#each thread}}
-        <article data-threadId="{{_id}}" data-userId="{{userId}}">
+        <article class="one-thread" data-threadId="{{_id}}" data-userId="{{userId}}">
           <h3>{{title}}</h3>
           <div>{{text}}</div>
-          <div>{{username}}</div>
+          <div>posted by {{username}}</div>
           <div class="thread-content">
             
-            
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="add-remark">Add Remark</button>
-
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-user">Follow User</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
-            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
-            <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
+              <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
+              <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
+
+            <!--{{#if res.body.auth}}-->
+            <!--{{/if}}-->
+
           </div>
         </article>
         
-        {{#each remark}}
+        {{#each remarks}}
           <div class="remark-content" id="view-remarks">
-            {{text}}
-            <div>{{username}}</div>
-            <div class="remark-content">
-              <button name="add-remark">Add Remark</button>
-              <button name="follow-user">Follow User</button>
-              <button name="edit-remark">Edit Remark</button>
-              <button name="delete-remark">Delete Remark</button>
-              <button name="create-thread">Create New Thread</button>
+            <div>{{text}}</div>
+            <div>posted by {{username}}</div>
+            <div class="remark-buttons">
+
+              <button data-remId="{{_id}}" data-userId="{{userId}}" name="follow-user-rem">Follow User</button>
+              <button data-remId="{{_id}}" data-userId="{{userId}}" name="create-thread-rem">Create New Thread</button>
+
+              {{#if res.body.auth}}
+                <button data-remId="{{_id}}" data-userId="{{userId}}" name="edit-remark">Edit Remark</button>
+                <button data-remId="{{_id}}" data-userId="{{userId}}" name="delete-remark">Delete Remark</button>
+              {{/if}}
+
             </div>
           </div>
         {{/each}}
-
       {{/each}}
     </script>
 
@@ -189,8 +196,8 @@
 <!-- ------------------ add remark ---------------------- -->
     <div class="content" id="add-remark">
       <h2>Add New Remark</h2>
-      <form id="add-remark-form" method="post">>
-        <textarea value="Thread Text"rows="6" cols="80"></textarea>
+      <form id="add-remark-form" method="post">
+        <textarea name="Remark Text"rows="6" cols="80"></textarea>
         <input type="submit" value="Add Remark" class="submit">
       </form>
     </div>
@@ -250,7 +257,6 @@
     <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>  
     <script type="text/javascript" src="scripts/controllers/logoutController.js"></script>
     <script type="text/javascript" src="scripts/controllers/followingController.js"></script>
-    <script type="text/javascript" src="scripts/controllers/addRemarkController.js"></script>
     <script type="text/javascript" src="scripts/controllers/routes.js"></script>
     
     
