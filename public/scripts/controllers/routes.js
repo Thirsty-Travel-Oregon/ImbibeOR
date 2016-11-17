@@ -7,6 +7,7 @@ page('/about', aboutController.reveal);
 page('/add-thread', addThreadController.reveal);
 page('/logout', logoutController.reveal);
 page('/following', followingController.reveal);
+//page('/titles', titleController.reveal);
 //possibly convert this to a not found handler
 page('*', homeController.reveal);
 
