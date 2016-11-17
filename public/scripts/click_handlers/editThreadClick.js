@@ -5,15 +5,15 @@
     console.log('thread Id is ', threadId);
     superagent
       .get('/api/threads/'+threadId)
-        .set('Content-Type', 'application/json')
-        .then(res => {
-          $('#edit-thread-title').html(res.body.title);
-          $('#edit-thread-textarea').html(res.body.text);
-          $('#edit-thread').fadeIn();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      .set('Content-Type', 'application/json')
+      .then(res => {
+        $('#edit-thread-title').html(res.body.title);
+        $('#edit-thread-textarea').html(res.body.text);
+        $('#edit-thread').fadeIn();
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     $('#edit-thread-form').on('submit', function(){
       const editedText = $('#edit-thread-textarea').val();
