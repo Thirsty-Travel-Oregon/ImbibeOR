@@ -13,6 +13,7 @@ $('.drink-type-cat li').on('click', function(e) {
       const threadObject = {
         thread: res.body
       };
+      console.log(res.body, threadObject);
       const newHtml = template(threadObject);
       $('#thread-container').append(newHtml);
 
