@@ -6,13 +6,14 @@ $('.drink-type-cat li').on('click', function(e) {
   console.log('button clicked', drinkTypeClicked);
   superagent
     .get(`/api/threads/drinkType/${drinkTypeClicked}`)
+    .send({currUser: sessionStorage.getItem('storedUserID')})
     .then((res) => {
       const source = $('#thread-template').html();
       const template = Handlebars.compile(source);
       const threadObject = {
-        thread: res.body/*,
-        currUser: sessionStorage.getItem('storedUserID')*/
+        thread: res.body
       };
+      console.log(res.body, threadObject);
       const newHtml = template(threadObject);
       $('#thread-container').append(newHtml);
 
