@@ -65,47 +65,53 @@ describe('Thread Tests: ', () => {
       .catch(done);
   });
 
-  before( done => {
-    console.log('get the Admin user Id');
-    User.find({username: userAdmin.username})
-      .then(user => assert.ok(userAdmin.userId = user[0]._id))
-      .then(done)
-      .catch(done);
-  });
+  // before( done => {
+  //   console.log('get the Admin user Id');
+  //   User.find({username: userAdmin.username})
+  //     .then(user => assert.ok(userAdmin.userId = user[0]._id))
+  //     .then(done)
+  //     .catch(done);
+  // });
 
   before( done => {
     request
       .post( '/api/auth/signup' )
       .send( userModerator )
-      .then( res => assert.ok( tokenModerator = res.body.token ) )
-      .then( done )
+      .then( res => {
+        assert.ok( tokenModerator = res.body.token );
+        assert.ok(userModerator.userId = res.body.userId);
+        done();
+      })
       .catch(done);
   });
 
-  before( done => {
-    console.log('get the Moderator user Id');
-    User.find({username: userModerator.username})
-      .then(user => assert.ok(userModerator.userId = user[0]._id))
-      .then(done)
-      .catch(done);
-  });
+  // before( done => {
+  //   console.log('get the Moderator user Id');
+  //   User.find({username: userModerator.username})
+  //     .then(user => assert.ok(userModerator.userId = user[0]._id))
+  //     .then(done)
+  //     .catch(done);
+  // });
 
   before( done => {
     request
       .post( '/api/auth/signup' )
       .send( userBasic )
-      .then( res => assert.ok( tokenBasic = res.body.token ) )
-      .then( done )
+      .then( res => {
+        assert.ok( tokenBasic = res.body.token );
+        assert.ok(userBasic.userId = res.body.userId);
+        done();
+      })
       .catch(done);
   });
 
-  before( done => {
-    console.log('get the Basic user Id');
-    User.find({username: userBasic.username})
-      .then(user => assert.ok(userBasic.userId = user[0]._id))
-      .then(done)
-      .catch(done);
-  });
+  // before( done => {
+  //   console.log('get the Basic user Id');
+  //   User.find({username: userBasic.username})
+  //     .then(user => assert.ok(userBasic.userId = user[0]._id))
+  //     .then(done)
+  //     .catch(done);
+  // });
 
   it('GET all without token', done => {
     request
@@ -167,6 +173,7 @@ describe('Thread Tests: ', () => {
         testThread.createdAt = thread.createdAt;
         testThread.updatedAt = thread.updatedAt;
         testThread.userId = thread.userId;
+        testThread.remarks = [];
         done();
       })
       .catch(done);
@@ -204,6 +211,7 @@ describe('Thread Tests: ', () => {
       .set('Authorization', `Bearer ${tokenBasic}`)
       .send(testThreadUpd)
       .then(res => {
+        delete testThread.remarks;
         assert.deepEqual(res.body, testThread);
         testThread.text = testThreadUpd.text;
         done();
