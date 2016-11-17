@@ -22,11 +22,19 @@ $('#add-thread-form').submit(function(event) {
         .set('Authorization', token)
         .set('Content-Type', 'application/json')
         .send(jsonData)
-        .then((res) => {
-          $('#add-thread-form').append('<h3>New thread, <em>'+submitObj.title+'</em> added to the '+submitObj.region+' region.</h3>');
-        })
-        .then(() => {
-          location.href = '/';
+        .then(res => {
+          superagent
+            .get(`/api/threads/${res.body._id}`)
+            .set('Content-Type', 'application/json')
+            .set('Authorization', token)
+            .then(res => {
+              page('/');
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              let threadObj = {thread: res.body};
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
         })
         .catch((err) => {
           console.log(err);

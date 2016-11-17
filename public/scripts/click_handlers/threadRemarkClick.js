@@ -25,7 +25,6 @@ $('#thread-container').on('click', 'button', function(e) {
       };
       $('#add-remark-form').off();
       let jsonData = JSON.stringify(submitObj);
-      console.log('jsondata', jsonData);
       superagent
         .post('/api/remarks/')
         .set('Content-Type', 'application/json')
@@ -79,17 +78,10 @@ $('#thread-container').on('click', 'button', function(e) {
     editThreadClick(threadIdMarker);
 
   }else if (threadButtonClicked === 'edit-remark') {
-    //still way not done!
-    superagent
-      .put(`/api/threads/${remarkIdMarker}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', token)
-      .then(() => {
+    const threadIdMarker = e.target.getAttribute('data-threadId');
+    editRemarkClick(threadIdMarker);
 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
   }else if (threadButtonClicked === 'delete-thread') {
     superagent
       .delete(`/api/threads/${threadIdMarker}`)
@@ -97,7 +89,6 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: threadOwnerIdMarker})
       .then(() => {
-        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
@@ -109,7 +100,6 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: remOwnerIdMarker})
       .then(() => {
-        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
