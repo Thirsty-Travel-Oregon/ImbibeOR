@@ -31,7 +31,8 @@ $('#thread-container').on('click', 'button', function(e) {
       const submitObj = {
         text: submitData,
         threadId: threadIdMarker,
-        userId: currUserId
+        userId: currUserId,
+        username: sessionStorage.getItem('storedUsername')
       };
       let jsonData = JSON.stringify(submitObj);
       superagent
@@ -41,12 +42,13 @@ $('#thread-container').on('click', 'button', function(e) {
         .send(jsonData)
         .then(res => {
           $('#add-remark').hide();
-          // console.log('resbod', res.body);
+          console.log('first resbod', res.body);
           superagent
             // .get(`/api/threads/${res.body.threadId}`)
             .get('/api/threads')
             .set('Authorization', token)
             .then(res => {
+              console.log('second resbod', res.body);
               const source = $('#thread-template').html();
               const template = Handlebars.compile(source);
               // let remarksArr = res.body.remarks;
@@ -56,6 +58,7 @@ $('#thread-container').on('click', 'button', function(e) {
               // }
               // console.log('remarkobj', remarkObj);
               let threadObj = {thread: res.body};
+              console.log('threadObj', threadObj);
               const newHtml = template(threadObj);
               $('#thread-container').append(newHtml);
             });
