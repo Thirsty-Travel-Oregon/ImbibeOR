@@ -7,8 +7,9 @@
       .get('/api/threads/'+threadId)
         .set('Content-Type', 'application/json')
         .then(res => {
-          $('#edit-thread-title').html(res.body.title);
-          $('#edit-thread-textarea').html(res.body.text);
+          console.log('response body is', res.body[0])
+          $('#edit-thread-title').html(res.body[0].title);
+          $('#edit-thread-textarea').html(res.body[0].text);
           $('#edit-thread').fadeIn();
         })
         .catch(err => {
