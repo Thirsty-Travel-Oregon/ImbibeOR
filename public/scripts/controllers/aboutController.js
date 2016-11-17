@@ -2,14 +2,13 @@
   var aboutController = {};
 
   aboutController.reveal = function() {
-    console.log('about controller triggered.');
     $('.content').not('#about-page').hide();
     $('#about-page').fadeIn();
     $('.link a').fadeIn();
     $('#about-link').hide();
     if(!sessionStorage.getItem('storedToken')){
       $('#logout-link').hide();
-      $('following-link').hide();
+      $('#following-link').hide();
     }
     else{
       $('#signup-link').hide();

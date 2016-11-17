@@ -12,7 +12,7 @@
     $('#home-link').hide();
     if(!sessionStorage.getItem('storedToken')){
       $('#logout-link').hide();
-      $('following-link').hide();
+      $('#following-link').hide();
     }
     else{
       $('#signup-link').hide();
