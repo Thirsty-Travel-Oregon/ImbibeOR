@@ -15,7 +15,6 @@ $('#login-form').submit(function(event) {
       sessionStorage.setItem('storedToken', token);
       sessionStorage.setItem('storedUserID', res.body.userId);
       sessionStorage.setItem('storedUsername', res.body.userName);
-      alert('Logged in as '+res.body.userName+'.');
       $('#user-status').text('Logged in as '+res.body.userName);
       $('#signup-link').hide();
       $('#login-link').hide();
