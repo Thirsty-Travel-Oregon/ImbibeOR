@@ -6,7 +6,7 @@ $('area').on('click', function(e) {
   console.log(regionClicked);
   superagent
     .get(`/api/threads/region/${regionClicked}`)
-    .send({currUser: sessionStorage.getItem('storedUserID')})
+    .send({currUser: sessionStorage.getItem('storedUserID')}) //can't do this
     .then((res) => {
       console.log('final threads?', res);
       const source = $('#thread-template').html();
@@ -19,6 +19,7 @@ $('area').on('click', function(e) {
 
       if (!sessionStorage.getItem('storedToken')) {
         $('#thread-container button').hide();
+        $('#remark-buttons button').hide();
       }
     })
     .catch((err) => {

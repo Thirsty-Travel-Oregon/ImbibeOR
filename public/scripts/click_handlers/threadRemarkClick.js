@@ -36,15 +36,17 @@ $('#thread-container').on('click', 'button', function(e) {
         .send(jsonData)
         .then((res) => {
           $('#add-remark').hide();
+          $('#thread-container').empty();
           console.log('thread Id Marker', threadIdMarker);
           superagent
             .get(`/api/threads/${threadIdMarker}`)
             .set('Authorization', token)
+            .send({currUser: sessionStorage.getItem('storedUserID')}) //cannot do this
             .then(res => {
               const source = $('#thread-template').html();
               const template = Handlebars.compile(source);
               let threadObj = {thread: res.body};
-              console.log('res body', res.body);
+              console.log('thread object: ', threadObj);
               const newHtml = template(threadObj);
               $('#thread-container').append(newHtml);
             });
@@ -76,17 +78,9 @@ $('#thread-container').on('click', 'button', function(e) {
         console.log(err);
       });
   }else if (threadButtonClicked === 'edit-post') {
-    //way not done yet!
-    superagent
-      .put(`/api/threads/${threadIdMarker}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', token)
-      .then(() => {
+    const threadIdMarker = e.target.getAttribute('data-threadId');
+    editThreadClick(threadIdMarker);
 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }else if (threadButtonClicked === 'edit-remark') {
     //still way not done!
     superagent
