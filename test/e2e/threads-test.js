@@ -155,8 +155,6 @@ describe('Thread Tests: ', () => {
       .catch(done);
   });
 
-
-//=========>>>>>>>>>>
   it('GET all after POST', done => {
     request
       .get('/api/threads')
