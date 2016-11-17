@@ -6,7 +6,6 @@ $('.drink-type-cat li').on('click', function(e) {
   console.log('button clicked', drinkTypeClicked);
   superagent
     .get(`/api/threads/drinkType/${drinkTypeClicked}`)
-    .send({currUser: sessionStorage.getItem('storedUserID')})
     .then((res) => {
       const source = $('#thread-template').html();
       const template = Handlebars.compile(source);
