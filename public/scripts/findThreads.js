@@ -2,9 +2,10 @@
 (function(module) {
 
   function findThreads(){
-    console.log('find threads called');
+    const token = 'Bearer ' + sessionStorage.getItem('storedToken');
     superagent
       .get('/api/threads/region/'+stateObject.region+'/drinkType/'+stateObject.drinkType)
+      .set({'Authorization': token})
       .then((res) => {
         const source = $('#thread-template').html();
         const template = Handlebars.compile(source);

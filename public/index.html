@@ -228,16 +228,18 @@
 
 <!-- ------------------ search threads secondary---------------------- -->
    <div class="content" id="drink-type-select-div">
-     <select class ="thread-select" id="drink-type-select-search">
+     <select class ="thread-select" id="drink-type-select-search" >
+       <option value="" disabled selected>Select Drink Type</option>
        <option value="beer">Beer</option>
        <option value="wine">Wine</option>
        <option value="spirits">Spirits</option>
        <option value="other">Other</option>
      </select>
    </div>
-   
+
    <div class="content" id="region-select-div">
-     <select class ="thread-select-param" id="region-select-param">
+     <select class ="thread-select-param" id="region-select-search">
+        <option value="" disabled selected>Select Region</option>
         <option value="portland">Portland</option>
         <option value="willamette">Willamette Valley</option>
         <option value="hood-gorge">Mt. Hood - Columbia Gorge</option>
@@ -259,9 +261,6 @@
         <input type="submit" id="Search-text-submit" value="search-threads" class="submit">
       </form>
      </div> 
-    <div class="content" id="thread-container"></div>
-
-    </div>
 
 <!-- ----------------- view thread ----------------------- -->
     <div class="content" id="thread-container"></div>
@@ -302,6 +301,7 @@
     <script type="text/javascript" src="scripts/findThreads.js"></script>
 
     <!-- Click Handlers Files -->
+    <script type="text/javascript" src="scripts/click_handlers/searchRegionClick.js"></script> 
     <script type="text/javascript" src="scripts/click_handlers/searchDrinkClick.js"></script> 
     <script type="text/javascript" src="scripts/click_handlers/searchParamsClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/allRegionsClick.js"></script>
