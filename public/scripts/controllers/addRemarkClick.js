@@ -7,7 +7,7 @@ $('#add-remark-form').submit(event => {
   } else {
     const submitObj = {
       text: submitData[0].value,
-      threadId: yyy,
+      // threadId: yyy,
       userId: userId
     };
     if (parentRemark) {

@@ -17,18 +17,29 @@ $('#thread-container').on('click', 'button', function(e) {
 
 
   if (threadButtonClicked === 'add-remark') {
-    superagent
-      .get(`/api/${name}`)
-      .then((res) => {
-        console.log('res', res);
-//do something with the response
-//not working yet
-//thats why so many comments
-//as a placeholder
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log('button is being clicked');
+    $('#add-remark').fadeIn();
+    $('#add-remark-form').submit(event => {
+      event.preventDefault();
+      let submitData = $(this).serializeArray();
+      const submitObj = {
+        text: submitData[0].value,
+        threadId: threadIdMarker,
+        userId: currUserId
+      };
+      let jsonData = JSON.stringify(submitObj);
+      superagent
+        .post('/api/remarks/')
+        .set('Content-Type', 'application/json')
+        .set('Authorization', token)
+        .send(jsonData)
+        .then(res => {
+          $('#add-remark').hide();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }else if (threadButtonClicked === 'follow-user') {
     superagent
       .put(`/api/users/followUser/${currUserId}`)
