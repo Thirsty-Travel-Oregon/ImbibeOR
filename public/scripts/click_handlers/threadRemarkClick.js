@@ -82,17 +82,10 @@ $('#thread-container').on('click', 'button', function(e) {
     editThreadClick(threadIdMarker);
 
   }else if (threadButtonClicked === 'edit-remark') {
-    //still way not done!
-    superagent
-      .put(`/api/threads/${remarkIdMarker}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', token)
-      .then(() => {
+    const threadIdMarker = e.target.getAttribute('data-threadId');
+    editRemarkClick(threadIdMarker);
 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
   }else if (threadButtonClicked === 'delete-thread') {
     superagent
       .delete(`/api/threads/${threadIdMarker}`)

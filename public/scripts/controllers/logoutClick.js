@@ -8,7 +8,7 @@ $('#logout-button').on('click', function(event) {
   $('#signup-link').fadeIn();
   $('#login-link').fadeIn();
   $('#following-link').fadeIn();
-  location.href = '/';
+  // location.href = '/';
 });
 
 
