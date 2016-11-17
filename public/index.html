@@ -35,10 +35,10 @@
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-user">Follow User</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
+
+            <!--{{#if thread.isOwner}}-->
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
-
-            <!--{{#if res.body.auth}}-->
             <!--{{/if}}-->
 
           </div>
@@ -53,7 +53,7 @@
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="follow-user-rem">Follow User</button>
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="create-thread-rem">Create New Thread</button>
 
-              {{#if res.body.auth}}
+              {{#if remarks.isOwner}}
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="edit-remark">Edit Remark</button>
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="delete-remark">Delete Remark</button>
               {{/if}}
@@ -83,22 +83,23 @@
           <li class="link"><a href="logout" id="logout-link">Log Out</a></li>
         </ul>
       </nav>
+      <p id="user-status">Not logged in</p>
 
       <!-- --------------- login ------------------------- -->
       <div class="content" id="login-page">
-        <h2>Log In</h2>
+        <h2 id="login-header">Log In</h2>
         <form id="login-form">
           Username:<br>
           <input type="text" name="username"><br>
           Password:<br>
-          <input type="text" name="password"><br><br>
+          <input type="password" name="password"><br><br>
           <input type="submit" value="Login" class="submit">
         </form>
       </div>
 
       <!-- ----------------- sign up ----------------------- -->
       <div class="content" id="signup-page">
-        <h2>Sign Up</h2>
+        <h2 id ='signup-header'>Sign Up</h2>
         <form id="signup-form">
           Name:<br>
           <input type="text" name="name"><br>
@@ -192,7 +193,15 @@
         <input type="submit" value="Add Thread" class="submit">
       </form>
     </div>
-
+<!-- ------------------ edit thread ---------------------- -->
+    <div class="content" id="edit-thread">
+      <h2 id='edit-thread-header'>Edit Thread: </h2>
+      <h2 id='edit-thread-title'></h2>
+      <form id="edit-thread-form">
+        <textarea id='edit-thread-textarea' rows="6" cols="80">Thread Text can be edited</textarea>
+        <input type="submit" value="Save Edit" class="submit">
+      </form>
+    </div>
 <!-- ------------------ add remark ---------------------- -->
     <div class="content" id="add-remark">
       <h2>Add New Remark</h2>
@@ -215,12 +224,11 @@
       <div class="content" id="following-page">
         <h2 >Following </h2>
         <h3 >Users</h3>
-        <h4 id='following-users-tag'>You are following these users:</h4>
+        <h4 id='following-users-tag'>You are following these <em>users:<em></h4>
         <br>
         <h3 >Threads</h3>
-        <h4 id='following-threads-tag'>You are following these users:</h4>
+        <h4 id='following-threads-tag'>You are following these <em>threads:<em></h4>
         <br>
-
       </div>
 
 
@@ -241,10 +249,12 @@
     <script type="text/javascript" src="vendor/handlebars.js"></script>
 
     <!-- Click Handlers Files -->
+    <script type="text/javascript" src="scripts/click_handlers/editThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/addThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/loginClick.js"></script>
     <script type="text/javascript" src="scripts/controllers/logoutClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/signupClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/editThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/threadRemarkClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/drinkTypeClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/mapClick.js"></script>

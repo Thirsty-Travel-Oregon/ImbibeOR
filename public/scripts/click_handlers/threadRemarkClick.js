@@ -4,11 +4,7 @@ $('#thread-container').on('click', 'button', function(e) {
   const token = 'Bearer ' + sessionStorage.getItem('storedToken');
 
   const threadButtonClicked = $(this).attr('name');
-  console.log('button clicked', threadButtonClicked);
-
   const currUserId = sessionStorage.getItem('storedUserID');
-  console.log('currUserId', currUserId);
-
   const username = sessionStorage.getItem('storedUsername');
   const threadOwnerIdMarker = e.target.getAttribute('data-userId');
   const threadIdMarker = e.target.getAttribute('data-threadId');
@@ -27,6 +23,7 @@ $('#thread-container').on('click', 'button', function(e) {
         userId: currUserId,
         username: username
       };
+      $('#add-remark-form').off();
       let jsonData = JSON.stringify(submitObj);
       console.log('jsondata', jsonData);
       superagent
@@ -41,8 +38,8 @@ $('#thread-container').on('click', 'button', function(e) {
           superagent
             .get(`/api/threads/${threadIdMarker}`)
             .set('Authorization', token)
-            .send({currUser: sessionStorage.getItem('storedUserID')})
             .then(res => {
+              $('#thread-container').empty();
               const source = $('#thread-template').html();
               const template = Handlebars.compile(source);
               let threadObj = {thread: res.body};
@@ -78,17 +75,9 @@ $('#thread-container').on('click', 'button', function(e) {
         console.log(err);
       });
   }else if (threadButtonClicked === 'edit-post') {
-    //way not done yet!
-    superagent
-      .put(`/api/threads/${threadIdMarker}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', token)
-      .then(() => {
+    const threadIdMarker = e.target.getAttribute('data-threadId');
+    editThreadClick(threadIdMarker);
 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }else if (threadButtonClicked === 'edit-remark') {
     //still way not done!
     superagent
