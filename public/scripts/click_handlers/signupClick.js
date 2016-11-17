@@ -16,10 +16,12 @@ $('#signup-form').submit(function(event) {
       sessionStorage.setItem('storedToken', res.body.token);
       sessionStorage.setItem('storedUserID', res.body.userId);
       sessionStorage.setItem('storedUsername', res.body.userName);
-      alert('Logged in as '+res.body.userName+'.');
       $('#signup-link').hide();
       $('#login-link').hide();
       $('#logout-link').fadeIn();
+    })
+    .then(() => {
+      location.href = '/';
     })
     .catch((err) => {
       console.log(err);
