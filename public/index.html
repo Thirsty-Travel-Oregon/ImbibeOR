@@ -25,7 +25,7 @@
     <!-- --------------- full thread template --------------------- -->
     <script id="thread-template" type="text/x-handlebars-template">
       {{#each thread}}
-        <article data-threadId="{{_id}}" data-userId="{{userId}}">
+        <article class="one-thread" data-threadId="{{_id}}" data-userId="{{userId}}">
           <h3>{{title}}</h3>
           <div>{{text}}</div>
           <div>posted by {{username}}</div>
@@ -44,11 +44,11 @@
           </div>
         </article>
         
-        {{#each remark}}
+        {{#each remarks}}
           <div class="remark-content" id="view-remarks">
             <div>{{text}}</div>
-            <div>{{username}}</div>
-            <div class="remark-content">
+            <div>posted by {{username}}</div>
+            <div class="remark-buttons">
 
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="follow-user-rem">Follow User</button>
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="create-thread-rem">Create New Thread</button>
