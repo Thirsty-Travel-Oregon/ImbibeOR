@@ -77,17 +77,9 @@ $('#thread-container').on('click', 'button', function(e) {
         console.log(err);
       });
   }else if (threadButtonClicked === 'edit-post') {
-    //way not done yet!
-    superagent
-      .put(`/api/threads/${threadIdMarker}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', token)
-      .then(() => {
+    const threadIdMarker = e.target.getAttribute('data-threadId');
+    editThreadClick(threadIdMarker);
 
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }else if (threadButtonClicked === 'edit-remark') {
     //still way not done!
     superagent
