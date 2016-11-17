@@ -23,18 +23,47 @@ $('#thread-container').on('click', 'button', function(e) {
 
 
   if (threadButtonClicked === 'add-remark') {
-    superagent
-      .get(`/api/${name}`)
-      .then((res) => {
-        console.log('res', res);
-//do something with the response
-//not working yet
-//thats why so many comments
-//as a placeholder
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    $('#add-remark').fadeIn();
+    $('#add-remark-form').submit(event => {
+      event.preventDefault();
+      $('#thread-container').empty();
+      let submitData = $('textarea[name="Remark Text"]').val();
+      const submitObj = {
+        text: submitData,
+        threadId: threadIdMarker,
+        userId: currUserId
+      };
+      let jsonData = JSON.stringify(submitObj);
+      superagent
+        .post('/api/remarks/')
+        .set('Content-Type', 'application/json')
+        .set('Authorization', token)
+        .send(jsonData)
+        .then(res => {
+          $('#add-remark').hide();
+          // console.log('resbod', res.body);
+          superagent
+            // .get(`/api/threads/${res.body.threadId}`)
+            .get('/api/threads')
+            .set('Authorization', token)
+            .then(res => {
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              // let remarksArr = res.body.remarks;
+              // let remarkObj = {};
+              // for(let i = 0; i < remarksArr.length; i++) {
+              //   remarkObj['remark' + (i + 1) + ''] = remarksArr[i].text;
+              // }
+              // console.log('remarkobj', remarkObj);
+              let threadObj = {thread: res.body};
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }else if (threadButtonClicked === 'follow-user') {
     superagent
       .put(`/api/users/followUser/${currUserId}`)

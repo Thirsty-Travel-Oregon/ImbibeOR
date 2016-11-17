@@ -60,6 +60,7 @@
 
             </div>
           </div>
+        {{/each}}
       {{/each}}
     </script>
 
@@ -195,8 +196,8 @@
 <!-- ------------------ add remark ---------------------- -->
     <div class="content" id="add-remark">
       <h2>Add New Remark</h2>
-      <form id="add-remark-form" method="post">>
-        <textarea value="Thread Text"rows="6" cols="80"></textarea>
+      <form id="add-remark-form" method="post">
+        <textarea name="Remark Text"rows="6" cols="80"></textarea>
         <input type="submit" value="Add Remark" class="submit">
       </form>
     </div>
@@ -257,6 +258,7 @@
     <script type="text/javascript" src="scripts/controllers/logoutController.js"></script>
     <script type="text/javascript" src="scripts/controllers/followingController.js"></script>
     <script type="text/javascript" src="scripts/controllers/routes.js"></script>
+    
     
   </body>
 </html>
