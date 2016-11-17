@@ -57,26 +57,29 @@
           <li class="link"><a href="about" id="about-link">About</a></li>
           <li class="link"><a href="add-thread" id="add-thread-link">Add New Thread</a></li>
           <li class="link"><a href="search-threads" id="search-threads-link">Search Threads</a></li>
-          <li class="link"><a href="login" id="login-link">Log In</a></li>
+          <li class="link"><a href="following"  id="following-link">Following</a></li>
+          <li class="link"><a href="login"  id="login-link">Log In</a></li>
           <li class="link"><a href="signup" id="signup-link">Sign up</a></li>
+          <li class="link"><a href="logout" id="logout-link">Log Out</a></li>
         </ul>
       </nav>
+      <p id="user-status">Not logged in</p>
 
       <!-- --------------- login ------------------------- -->
       <div class="content" id="login-page">
-        <h2>Log In</h2>
+        <h2 id="login-header">Log In</h2>
         <form id="login-form">
           Username:<br>
           <input type="text" name="username"><br>
           Password:<br>
-          <input type="text" name="password"><br><br>
+          <input type="password" name="password"><br><br>
           <input type="submit" value="Login" class="submit">
         </form>
       </div>
 
       <!-- ----------------- sign up ----------------------- -->
       <div class="content" id="signup-page">
-        <h2>Sign Up</h2>
+        <h2 id ='signup-header'>Sign Up</h2>
         <form id="signup-form">
           Name:<br>
           <input type="text" name="name"><br>
@@ -88,6 +91,12 @@
           <input type="password" name="Password"><br><br>
           <input type="submit" value="Sign Up" class="submit">
         </form>
+      </div>
+
+      <!-- --------------- logout ------------------------- -->
+      <div class="content" id="logout-page">
+        <h2 id='logout-message'></h2>
+         <button id="logout-button">Log Out</button>
       </div>
 
     </div>
@@ -177,14 +186,26 @@
 <!-- ----------------- view thread ----------------------- -->
     <div class="content" id="thread-container"></div>
 
-<!-- ----------------- view remark ----------------------- -->
-
 <!-- ------------------ about ---------------------- -->
     <div class="content" id="about-page">
       <h2>About Imbibe, OR</h2>
       <p>about information here </p>
     </div>
 
+  <!-- --------------- following ------------------------- -->
+      <div class="content" id="following-page">
+        <h2 >Following </h2>
+        <h3 >Users</h3>
+        <h4 id='following-users-tag'>You are following these <em>users:<em></h4>
+        <br>
+        <h3 >Threads</h3>
+        <h4 id='following-threads-tag'>You are following these <em>threads:<em></h4>
+        <br>
+      </div>
+
+
+
+    </div>
 <!-- --------------------- footer ------------------- -->
     <div class="static" id="footer">
       <p><span class="copy">&copy; Thirsty-Travel-Oregon, 2016</span></p>
@@ -197,24 +218,26 @@
     <script type="text/javascript">$('map').imageMapResize();</script>
   
     <script src="vendor/superagent/superagent.js"></script>
+    <script type="text/javascript" src="vendor/handlebars.js"></script>
 
-    <!-- Model Files -->
-   <script type="text/javascript" src="clickHandling.js"></script>
-   <script type="text/javascript" src="vendor/handlebars.js"></script>
-
-    <!-- View Files -->
+    <!-- Click Handlers Files -->
+    <script type="text/javascript" src="scripts/click_handlers/addThreadClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/loginClick.js"></script>
+    <script type="text/javascript" src="scripts/controllers/logoutClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/signupClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/threadRemarkClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/drinkTypeClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/mapClick.js"></script>
 
     <!-- Controller Files -->
-    <script type="text/javascript" src="scripts/controllers/addThreadClick.js"></script>
-    <script type="text/javascript" src="scripts/controllers/loginClick.js"></script>
-    <script type="text/javascript" src="scripts/controllers/signupClick.js"></script>
     <script type="text/javascript" src="scripts/controllers/homeController.js"></script>
     <script type="text/javascript" src="scripts/controllers/signupController.js"></script>
     <script type="text/javascript" src="scripts/controllers/loginController.js"></script>
     <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>
-    <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/addThreadController.js"></script>  
+    <script type="text/javascript" src="scripts/controllers/logoutController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/followingController.js"></script>
     <script type="text/javascript" src="scripts/controllers/routes.js"></script>
-
     
   </body>
 </html>

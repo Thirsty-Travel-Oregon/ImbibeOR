@@ -12,10 +12,15 @@ $('#login-form').submit(function(event) {
     .send(jsonData)
     .then((res) => {
       const token = res.body.token;
-      $('#login-form').append('<p>Logged as <em>'+submitObj.username+'</em></p>');
-      $('#login-form').append('<p>Your token is <em>'+token+'</em></p>');
       sessionStorage.setItem('storedToken', token);
       sessionStorage.setItem('storedUserID', res.body.userId);
+      sessionStorage.setItem('storedUsername', res.body.userName);
+      alert('Logged in as '+res.body.userName+'.');
+      $('#user-status').text('Logged in as '+res.body.userName);
+      $('#signup-link').hide();
+      $('#login-link').hide();
+      $('#following-link').fadeIn();
+      $('#logout-link').fadeIn();
     })
     .catch((err) => {
       console.log(err);
