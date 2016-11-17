@@ -1,14 +1,12 @@
 (function(module) {
   function editThreadClick(threadId) {
     const token = 'Bearer ' + sessionStorage.getItem('storedToken');
-    console.log('Edit thread click called');
-    console.log('thread Id is ', threadId);
     superagent
       .get('/api/threads/'+threadId)
       .set('Content-Type', 'application/json')
       .then(res => {
-        $('#edit-thread-title').html(res.body.title);
-        $('#edit-thread-textarea').html(res.body.text);
+        $('#edit-thread-title').html(res.body[0].title);
+        $('#edit-thread-textarea').html(res.body[0].text);
         $('#edit-thread').fadeIn();
       })
       .catch(err => {
