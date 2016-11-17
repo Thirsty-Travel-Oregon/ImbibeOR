@@ -65,14 +65,6 @@ describe('Thread Tests: ', () => {
       .catch(done);
   });
 
-  // before( done => {
-  //   console.log('get the Admin user Id');
-  //   User.find({username: userAdmin.username})
-  //     .then(user => assert.ok(userAdmin.userId = user[0]._id))
-  //     .then(done)
-  //     .catch(done);
-  // });
-
   before( done => {
     request
       .post( '/api/auth/signup' )
@@ -85,14 +77,6 @@ describe('Thread Tests: ', () => {
       .catch(done);
   });
 
-  // before( done => {
-  //   console.log('get the Moderator user Id');
-  //   User.find({username: userModerator.username})
-  //     .then(user => assert.ok(userModerator.userId = user[0]._id))
-  //     .then(done)
-  //     .catch(done);
-  // });
-
   before( done => {
     request
       .post( '/api/auth/signup' )
@@ -104,14 +88,6 @@ describe('Thread Tests: ', () => {
       })
       .catch(done);
   });
-
-  // before( done => {
-  //   console.log('get the Basic user Id');
-  //   User.find({username: userBasic.username})
-  //     .then(user => assert.ok(userBasic.userId = user[0]._id))
-  //     .then(done)
-  //     .catch(done);
-  // });
 
   it('GET all without token', done => {
     request
