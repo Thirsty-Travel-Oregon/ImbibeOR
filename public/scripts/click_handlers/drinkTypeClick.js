@@ -9,7 +9,10 @@ $('.drink-type-cat li').on('click', function(e) {
     .then((res) => {
       const source = $('#thread-template').html();
       const template = Handlebars.compile(source);
-      const threadObject = {thread: res.body};
+      const threadObject = {
+        thread: res.body/*,
+        currUser: sessionStorage.getItem('storedUserID')*/
+      };
       const newHtml = template(threadObject);
       $('#thread-container').append(newHtml);
 
