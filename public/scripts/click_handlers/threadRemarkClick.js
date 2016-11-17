@@ -6,11 +6,11 @@ $('#thread-container').on('click', 'button', function(e) {
   const threadButtonClicked = $(this).attr('name');
   console.log('button clicked', threadButtonClicked);
 
-  const currUserid = sessionStorage.getItem('storedUserID');
+  const currUserId = sessionStorage.getItem('storedUserID');
   console.log('currUserId', currUserId);
 
   const threadOwnerIdMarker = e.target.getAttribute('data-userId');
-  console.log('threadOwnerIdMarker', userIdMarker);
+  console.log('threadOwnerIdMarker', threadOwnerIdMarker);
 
   const threadIdMarker = e.target.getAttribute('data-threadId');
   console.log('threadIdMarker', threadIdMarker);
@@ -42,7 +42,7 @@ $('#thread-container').on('click', 'button', function(e) {
       });
   }else if (threadButtonClicked === 'follow-thread') {
     superagent
-      .put(`/api/users/followThread/${userIdMarker}`)
+      .put(`/api/users/followThread/${threadOwnerIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       .send({threadId: threadIdMarker
