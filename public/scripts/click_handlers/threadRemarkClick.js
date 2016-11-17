@@ -9,6 +9,8 @@ $('#thread-container').on('click', 'button', function(e) {
   const currUserId = sessionStorage.getItem('storedUserID');
   console.log('currUserId', currUserId);
 
+  const username = sessionStorage.getItem('storedUsername');
+
   const threadOwnerIdMarker = e.target.getAttribute('data-userId');
   console.log('threadOwnerIdMarker', threadOwnerIdMarker);
 
@@ -32,9 +34,10 @@ $('#thread-container').on('click', 'button', function(e) {
         text: submitData,
         threadId: threadIdMarker,
         userId: currUserId,
-        username: sessionStorage.getItem('storedUsername')
+        username: username
       };
       let jsonData = JSON.stringify(submitObj);
+      console.log('jsondata', jsonData);
       superagent
         .post('/api/remarks/')
         .set('Content-Type', 'application/json')
@@ -63,9 +66,9 @@ $('#thread-container').on('click', 'button', function(e) {
               $('#thread-container').append(newHtml);
             });
         })
-        .then(() => {
-          location.href = '/';
-        })
+        // .then(() => {
+        //   location.href = '/';
+        // })
         .catch(err => {
           console.log(err);
         });
