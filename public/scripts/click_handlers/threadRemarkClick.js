@@ -31,7 +31,8 @@ $('#thread-container').on('click', 'button', function(e) {
       const submitObj = {
         text: submitData,
         threadId: threadIdMarker,
-        userId: currUserId
+        userId: currUserId,
+        username: sessionStorage.getItem('storedUsername')
       };
       let jsonData = JSON.stringify(submitObj);
       superagent
