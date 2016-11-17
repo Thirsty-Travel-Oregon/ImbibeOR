@@ -4,11 +4,17 @@
   aboutController.reveal = function() {
     console.log('about controller triggered.');
     $('.content').not('#about-page').hide();
-    $('remark-content').hide();
-    $('.thread-content').hide();
     $('#about-page').fadeIn();
     $('.link a').fadeIn();
     $('#about-link').hide();
+    if(!sessionStorage.getItem('storedToken')){
+      $('#logout-link').hide();
+      $('following-link').hide();
+    }
+    else{
+      $('#signup-link').hide();
+      $('#login-link').hide();
+    }
   };
 
   module.aboutController = aboutController;
