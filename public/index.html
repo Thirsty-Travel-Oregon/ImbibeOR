@@ -35,10 +35,10 @@
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-user">Follow User</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
+
+            <!--{{#if thread.isOwner}}-->
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
-
-            <!--{{#if res.body.auth}}-->
             <!--{{/if}}-->
 
           </div>
@@ -53,7 +53,7 @@
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="follow-user-rem">Follow User</button>
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="create-thread-rem">Create New Thread</button>
 
-              {{#if res.body.auth}}
+              {{#if remarks.isOwner}}
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="edit-remark">Edit Remark</button>
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="delete-remark">Delete Remark</button>
               {{/if}}
