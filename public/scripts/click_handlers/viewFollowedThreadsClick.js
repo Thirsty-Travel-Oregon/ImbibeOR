@@ -2,9 +2,8 @@ $('#following-page').on('click', 'button', function(event) {
   event.preventDefault();
   console.log(event.target);
   const token = 'Bearer ' + sessionStorage.getItem('storedToken');
-
   const buttonClass = event.target.getAttribute('class');
-  console.log(buttonClass);
+
 
   if (buttonClass === 'view-followed-thread-button'){
     $('#thread-container').empty();
@@ -39,7 +38,6 @@ $('#following-page').on('click', 'button', function(event) {
           .then((res) =>{
             res.body.forEach(function(thread){
               if(thread.userId === authorId){
-                  console.log('matched thread is ', thread);
                 const source = $('#thread-template').html();
                 const template = Handlebars.compile(source);
                 const threadObject = {
@@ -57,8 +55,15 @@ $('#following-page').on('click', 'button', function(event) {
            .catch((err) => {
              console.log(err);
            });
-          })
+          });
   }
+  if (buttonClass === 'unfollow-button'){
+    console.log('unfollow user clicked');
+  }
+  if (buttonClass === 'unfollow-thread-button'){
+    console.log('unfollow thread clicked');
+  }
+
 });
 
 
