@@ -178,3 +178,21 @@ select:hover{
 .appended-threadname{
   color: forestgreen;
 }
+
+#followed-thread-div{
+  background-color: lightyellow;
+   padding-left: 0.40rem;
+  margin-left: 2rem;
+  margin-bottom: 0.1rem;
+  border: inset 0.2rem black;  
+  border-radius: 1rem;
+}
+
+#followed-user-div{
+  background-color: lightyellow;
+   padding-left: 0.40rem;
+  margin-left: 2rem;
+  margin-bottom: 0.1rem;
+  border: inset 0.2rem black;  
+  border-radius: 1rem;
+}
