@@ -6,7 +6,7 @@
     const token = 'Bearer ' + sessionStorage.getItem('storedToken');
     console.log('Edit remark click called');
     console.log('thread Id is ', threadId);
-    superagent
+    // superagent
     //   .get('/api/threads/'+threadId)
     //     .set('Content-Type', 'application/json')
     //     .then(res => {

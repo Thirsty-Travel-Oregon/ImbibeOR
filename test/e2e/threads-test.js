@@ -16,19 +16,9 @@ describe('Thread Tests: ', () => {
   const request = chai.request(app);
 
   before( done => {
-    const CONNECTED = 1;
-    if (connection.readyState === CONNECTED) dropCollection();
-    else connection.on('open', dropCollection);
-
-    function dropCollection(){
-      const name = 'threads';
-      connection.db
-        .listCollections({ name })
-        .next( (err, collinfo) => {
-          if (!collinfo) return done();
-          connection.db.dropCollection(name, done);
-        });
-    }
+    const drop = () => connection.db.dropDatabase(done);
+    if(connection.readyState === 1) drop();
+    else connection.once('open', drop);
   });
 
   const userAdmin = {
@@ -149,7 +139,8 @@ describe('Thread Tests: ', () => {
         testThread.createdAt = thread.createdAt;
         testThread.updatedAt = thread.updatedAt;
         testThread.userId = thread.userId;
-        testThread.remarks = [];
+        testThread.remarks = thread.remarks;
+        testThread.isOwner = thread.isOwner;
         done();
       })
       .catch(done);

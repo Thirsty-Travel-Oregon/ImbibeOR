@@ -4,11 +4,7 @@ $('#thread-container').on('click', 'button', function(e) {
   const token = 'Bearer ' + sessionStorage.getItem('storedToken');
 
   const threadButtonClicked = $(this).attr('name');
-  console.log('button clicked', threadButtonClicked);
-
   const currUserId = sessionStorage.getItem('storedUserID');
-  console.log('currUserId', currUserId);
-
   const username = sessionStorage.getItem('storedUsername');
   const threadOwnerIdMarker = e.target.getAttribute('data-userId');
   const threadIdMarker = e.target.getAttribute('data-threadId');
@@ -27,8 +23,8 @@ $('#thread-container').on('click', 'button', function(e) {
         userId: currUserId,
         username: username
       };
+      $('#add-remark-form').off();
       let jsonData = JSON.stringify(submitObj);
-      console.log('jsondata', jsonData);
       superagent
         .post('/api/remarks/')
         .set('Content-Type', 'application/json')
@@ -41,8 +37,8 @@ $('#thread-container').on('click', 'button', function(e) {
           superagent
             .get(`/api/threads/${threadIdMarker}`)
             .set('Authorization', token)
-            .send({currUser: sessionStorage.getItem('storedUserID')}) //cannot do this
             .then(res => {
+              $('#thread-container').empty();
               const source = $('#thread-template').html();
               const template = Handlebars.compile(source);
               let threadObj = {thread: res.body};
@@ -93,7 +89,6 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: threadOwnerIdMarker})
       .then(() => {
-        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
@@ -105,7 +100,6 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Authorization', token)
       .send({threadId: threadIdMarker, userId: remOwnerIdMarker})
       .then(() => {
-        location.href = '/';
       })
       .catch((err) => {
         console.log(err);
