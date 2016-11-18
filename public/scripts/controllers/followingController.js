@@ -33,7 +33,7 @@
                     .set('Content-Type', 'application/json')
                      .then((res) => {
                        console.log('res body is ', res.body[0]); 
-                       $('#following-threads-tag').append('<h4 class="appended-threadname">'+res.body[0].title+'</h4>');
+                       $('#following-threads-tag').append('<div class ="content" id="followed-thread-div"><h3 class="appended-threadname" data-threadId="'+threadId+'">'+res.body[0].title+'</h3><button class="view-followed-thread-button" data-threadId="'+threadId+'">View Thread</button><button class="unfollow-thread-button" data-threadId="'+threadId+'">Unfollow Thread</button><div>');
                      })
                         .catch((err) => {
                           console.log(err);
@@ -52,7 +52,7 @@
                     .set('Content-Type', 'application/json')
                      .then((res) => {
                        console.log(res.body.username);
-                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body.username+'</h4>');
+                       $('#following-users-tag').append('<div class ="content" id="followed-user-div"><h3 class="appended-username">'+res.body.username+'</h3><button class="view-followed-user-button" data-name="'+res.body.username+'">View Threads by User</button><button class="unfollow-button" data-name="'+res.body.username+'">Unfollow User</button><div>');
                      })
                         .catch((err) => {
                           console.log(err);
