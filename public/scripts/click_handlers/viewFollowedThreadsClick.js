@@ -1,8 +1,9 @@
 $('#following-page').on('click', 'button', function(event) {
   event.preventDefault();
-  console.log(event.target);
+
   const token = 'Bearer ' + sessionStorage.getItem('storedToken');
   const buttonClass = event.target.getAttribute('class');
+  const currUserId = sessionStorage.getItem('storedUserID');
 
 
   if (buttonClass === 'view-followed-thread-button'){
@@ -59,9 +60,41 @@ $('#following-page').on('click', 'button', function(event) {
   }
   if (buttonClass === 'unfollow-button'){
     console.log('unfollow user clicked');
+    $('#thread-container').empty();
+    const userId = event.target.getAttribute('data-userId'); 
+    console.log('user id is ', userId);
+   
+    superagent
+     .put('api/users/unfollowUser/'+currUserId) 
+            .set({'Content-Type': 'application/json'})
+            .set({'Authorization': token})
+            .send({userId: userId})
+            .then(() => {
+            })
+          .then((res) =>{
+          })
+           .catch((err) => {
+             console.log(err);
+           });
+    location.reload();
+
   }
   if (buttonClass === 'unfollow-thread-button'){
-    console.log('unfollow thread clicked');
+    $('#thread-container').empty();
+    const threadId = event.target.getAttribute('data-threadId'); 
+    superagent
+     .put('api/users/unfollowThread/'+currUserId) 
+            .set({'Content-Type': 'application/json'})
+            .set({'Authorization': token})
+            .send({threadId})
+            .then(() => {
+            })
+          .then((res) =>{
+          })
+           .catch((err) => {
+             console.log(err);
+           });
+    location.reload();
   }
 
 });
