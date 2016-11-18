@@ -108,6 +108,30 @@ button:hover{
   border: inset 0.5rem black;  
   border-radius: 1rem;
 }
+
+/*-------------- about page -------------------*/
+.contributor-center {
+  display: -webkit-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+  align-content: center;
+  -webkit-justify-content: center;
+  justify-content: space-around;
+}
+
+.contributors img {
+  width: 15rem;
+  /*align-self: center;*/
+}
+
+.contributors p {
+  width: 15rem;
+  /*align-self: center;*/
+}
+
 /*-------------- login logout signup -------------------*/
 #logout-button{
   position: relative;
