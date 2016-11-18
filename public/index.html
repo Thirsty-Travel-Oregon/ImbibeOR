@@ -29,17 +29,17 @@
           <h3>{{title}}</h3>
           <div>{{text}}</div>
           <div>posted by {{username}}</div>
-          <div class="thread-content">
+          <div class="thread-buttons">
             
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="add-remark">Add Remark</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-user">Follow User</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="follow-thread">Follow Thread</button>
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
 
-            <!--{{#if thread.isOwner}}-->
+            {{#if isOwner}}
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
-            <!--{{/if}}-->
+            {{/if}}
 
           </div>
         </article>
@@ -53,7 +53,7 @@
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="follow-user-rem">Follow User</button>
               <button data-remId="{{_id}}" data-userId="{{userId}}" name="create-thread-rem">Create New Thread</button>
 
-              {{#if remarks.isOwner}}
+              {{#if isOwner}}
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="edit-remark">Edit Remark</button>
                 <button data-remId="{{_id}}" data-userId="{{userId}}" name="delete-remark">Delete Remark</button>
               {{/if}}
@@ -214,7 +214,9 @@
     </div>
 
 <!-- ----------------- view thread ----------------------- -->
-    <div class="content" id="thread-container"></div>
+    <div id="flex-thread-container">
+      <div class="content" id="thread-container"></div>
+    </div>
 
 <!-- ------------------ about ---------------------- -->
     <div class="content" id="about-page">
@@ -233,9 +235,6 @@
         <br>
       </div>
 
-
-
-    </div>
 <!-- --------------------- footer ------------------- -->
     <div class="static" id="footer">
       <p><span class="copy">&copy; Thirsty-Travel-Oregon, 2016</span></p>

@@ -1,20 +1,17 @@
 (function(module) {
   function editThreadClick(threadId) {
     const token = 'Bearer ' + sessionStorage.getItem('storedToken');
-    console.log('Edit thread click called');
-    console.log('thread Id is ', threadId);
     superagent
       .get('/api/threads/'+threadId)
-        .set('Content-Type', 'application/json')
-        .then(res => {
-          console.log('response body is', res.body[0])
-          $('#edit-thread-title').html(res.body[0].title);
-          $('#edit-thread-textarea').html(res.body[0].text);
-          $('#edit-thread').fadeIn();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      .set('Content-Type', 'application/json')
+      .then(res => {
+        $('#edit-thread-title').html(res.body[0].title);
+        $('#edit-thread-textarea').html(res.body[0].text);
+        $('#edit-thread').fadeIn();
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     $('#edit-thread-form').on('submit', function(){
       const editedText = $('#edit-thread-textarea').val();
