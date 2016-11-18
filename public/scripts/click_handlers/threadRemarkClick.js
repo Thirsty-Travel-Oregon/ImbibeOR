@@ -35,19 +35,7 @@ $('#thread-container').on('click', 'button', function(e) {
         .then((res) => {
           $('#add-remark').hide();
           $('#thread-container').empty();
-          console.log('thread Id Marker', threadIdMarker);
-          superagent
-            .get(`/api/threads/${threadIdMarker}`)
-            .set('Authorization', token)
-            .then(res => {
-              $('#thread-container').empty();
-              const source = $('#thread-template').html();
-              const template = Handlebars.compile(source);
-              let threadObj = {thread: res.body};
-              console.log('thread object: ', threadObj);
-              const newHtml = template(threadObj);
-              $('#thread-container').append(newHtml);
-            });
+          findThreads();
         })
         .catch(err => {
           console.log(err);
@@ -91,8 +79,8 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       .then(res => {
-        console.log('delete thread resbod', res.body);
-        $(`article[data-ThreadId="${res.body._id}"]`).remove();
+        $('#thread-container').empty();
+        findThreads();
       })
       .catch((err) => {
         console.log(err);
@@ -104,22 +92,7 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Authorization', token)
       .then(res => {
         $('#thread-container').empty();
-        console.log('thread Id Marker', threadIdMarker);
-        superagent
-          //threadIdMarker is null at this point - why?
-          //Cast to ObjectId failed for value "null" at path "_id"
-          //GET /api/threads/null 500 10.014 ms - 33
-          .get(`/api/threads/${threadIdMarker}`)
-          .set('Authorization', token)
-          .then(res => {
-            $('#thread-container').empty();
-            const source = $('#thread-template').html();
-            const template = Handlebars.compile(source);
-            let threadObj = {thread: res.body};
-            console.log('thread object: ', threadObj);
-            const newHtml = template(threadObj);
-            $('#thread-container').append(newHtml);
-          });
+        findThreads();
       })
       .catch((err) => {
         console.log(err);
