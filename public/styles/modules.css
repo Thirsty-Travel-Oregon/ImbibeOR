@@ -137,3 +137,11 @@ select:hover{
   text-align: right;
   color: #F9F823;
 }
+
+.appended-username{
+  color: forestgreen;
+}
+
+.appended-threadname{
+  color: forestgreen;
+}
