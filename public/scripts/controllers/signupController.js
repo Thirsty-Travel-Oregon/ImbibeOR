@@ -9,10 +9,11 @@
     $('#signup-link').hide();
     if(!sessionStorage.getItem('storedToken')){
       $('#logout-link').hide();
-      $('following-link').hide();
+      $('#following-link').hide();
     }
     else{
       $('#login-link').hide();
+      $('#signup-link').hide();
     }
   };
 

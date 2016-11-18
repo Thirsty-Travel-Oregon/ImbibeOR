@@ -3,6 +3,8 @@
 
   followingController.reveal = function() {
     console.log('following controller triggered.');
+    $('#following-threads-tag .appended-threadname').remove();
+    $('#following-users-tag .appended-username').remove();
     $('.content').not('#following-page').hide();
     $('#following-page').fadeIn();
     $('.link a').fadeIn();
@@ -21,17 +23,38 @@
             .set('Authorization', token)
             .set('Content-Type', 'application/json')
             .then((res) => {
+              console.log(res.body);
               if(res.body.threadsFollowed.length){
-                res.body.threadsFollowed.forEach(thread, function(){ 
-                  $('#following-threads-tag').append('<h4>'+thread+'</h4>');
+                res.body.threadsFollowed.forEach(function(threadId){ 
+                  superagent
+                    .get ('/api/threads/'+threadId)
+                    .set('Authorization', token)
+                    .set('Content-Type', 'application/json')
+                     .then((res) => {
+                       console.log('res body is ', res.body[0]); 
+                       $('#following-threads-tag').append('<h4 class="appended-threadname">'+res.body[0].title+'</h4>');
+                     })
+                        .catch((err) => {
+                          console.log(err);
+                        });
                 });
               }
               else{
                 $('#following-threads-tag').text('You are currently not following any threads.');
               }
               if(res.body.usersFollowed.length){
-                res.body.usersFollowed.forEach(user, function(){ 
-                  $('#following-users-tag').append('<h3>'+user+'</h3>');
+                res.body.usersFollowed.forEach(function(userId){ 
+                  superagent
+                    .get ('/api/users/'+userId)
+                    .set('Authorization', token)
+                    .set('Content-Type', 'application/json')
+                     .then((res) => {
+                       console.log(res.body.username);
+                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body[0].username+'</h4>');
+                     })
+                        .catch((err) => {
+                          console.log(err);
+                        });
                 });
               }
               else{

@@ -13,13 +13,15 @@ $('#signup-form').submit(function(event) {
     .set('Content-Type', 'application/json')
     .send(jsonData)
     .then((res) => {
-      $('#signup-form').append('<p>Signed up as <em>'+submitObj.username+'</em></p>');
       sessionStorage.setItem('storedToken', res.body.token);
       sessionStorage.setItem('storedUserID', res.body.userId);
       sessionStorage.setItem('storedUsername', res.body.userName);
       $('#signup-link').hide();
       $('#login-link').hide();
       $('#logout-link').fadeIn();
+    })
+    .then(() => {
+      location.href = '/';
     })
     .catch((err) => {
       console.log(err);

@@ -11,7 +11,8 @@ $('#add-thread-form').submit(function(event) {
       text: submitData[1].value,
       region: document.getElementById('region-select').value,
       drinkType: document.getElementById('drink-type-select').value,
-      userId: userId
+      userId: userId,
+      username: sessionStorage.getItem('storedUsername')
     };
     jsonData = JSON.stringify(submitObj);
     var token ='Bearer ' +sessionStorage.getItem('storedToken')+'';
@@ -21,8 +22,19 @@ $('#add-thread-form').submit(function(event) {
         .set('Authorization', token)
         .set('Content-Type', 'application/json')
         .send(jsonData)
-        .then((res) => {
-          $('#add-thread-form').append('<h3>New thread, <em>'+submitObj.title+'</em> added to the '+submitObj.region+' region.</h3>');
+        .then(res => {
+          superagent
+            .get(`/api/threads/${res.body._id}`)
+            .set('Content-Type', 'application/json')
+            .set('Authorization', token)
+            .then(res => {
+              page('/');
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              let threadObj = {thread: res.body};
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
         })
         .catch((err) => {
           console.log(err);
