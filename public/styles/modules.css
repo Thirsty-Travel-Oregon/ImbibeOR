@@ -120,6 +120,19 @@ button:hover{
  text-align: center;
 }
 
+#search-threads{
+ text-align: center;
+}
+.search-param{
+  text-align: left;
+  color: blue;
+}
+
+select:hover{
+  background-color: #F9F823;
+  cursor:pointer;
+}
+
 #user-status{
   text-align: right;
   color: #F9F823;
