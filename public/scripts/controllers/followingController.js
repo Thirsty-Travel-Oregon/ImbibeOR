@@ -31,7 +31,8 @@
                     .set('Authorization', token)
                     .set('Content-Type', 'application/json')
                      .then((res) => {
-                       $('#following-threads-tag').append('<h4 class="appended-threadname">'+res.body.title+'</h4>');
+                       console.log('res body is ', res.body); 
+                       $('#following-threads-tag').append('<h4 class="appended-threadname">'+res.body[0].title+'</h4>');
                      })
                         .catch((err) => {
                           console.log(err);

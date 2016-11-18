@@ -11,8 +11,7 @@ $('#login-form').submit(function(event) {
     .set('Content-Type', 'application/json')
     .send(jsonData)
     .then((res) => {
-      const token = res.body.token;
-      sessionStorage.setItem('storedToken', token);
+      sessionStorage.setItem('storedToken', res.body.token);
       sessionStorage.setItem('storedUserID', res.body.userId);
       sessionStorage.setItem('storedUsername', res.body.userName);
       $('#user-status').text('Logged in as '+res.body.userName);
