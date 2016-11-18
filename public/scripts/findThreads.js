@@ -4,7 +4,7 @@
   function findThreads(){
     const token = 'Bearer ' + sessionStorage.getItem('storedToken'); 
     console.log('find threads called.  State object is', stateObject);
-    console.log('/api/threads/region/'+stateObject.region+'/drinkType/'+stateObject.drinkType)
+    console.log('/api/threads/region/'+stateObject.region+'/drinkType/'+stateObject.drinkType);
     superagent
       .get('/api/threads/region/'+stateObject.region+'/drinkType/'+stateObject.drinkType)
       .set('Authorization', token)
