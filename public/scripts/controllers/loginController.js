@@ -7,6 +7,13 @@
     $('#login-page').fadeIn();
     $('.link a').fadeIn();
     $('#login-link').hide();
+    if(!sessionStorage.getItem('storedToken')){
+      $('#logout-link').hide();
+      $('#following-link').hide();
+    }
+    else{
+      $('#signup-link').hide();
+    }
   };
 
   module.loginController = loginController;
