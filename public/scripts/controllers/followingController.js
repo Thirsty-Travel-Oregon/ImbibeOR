@@ -47,12 +47,12 @@
                 $('#following-users-tag').text('You are following these users:');
                 res.body.usersFollowed.forEach(function(userId){ 
                   superagent
-                    .get ('/api/users/searchuser'+userId)
+                    .get ('/api/users/searchuser/'+userId)
                     .set('Authorization', token)
                     .set('Content-Type', 'application/json')
                      .then((res) => {
                        console.log(res.body.username);
-                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body[0].username+'</h4>');
+                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body.username+'</h4>');
                      })
                         .catch((err) => {
                           console.log(err);

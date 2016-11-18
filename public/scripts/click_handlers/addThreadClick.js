@@ -30,6 +30,7 @@ $('#add-thread-form').submit(function(event) {
             .set('Authorization', token)
             .then(res => {
               page('/');
+              $('#thread-container').empty();
               const source = $('#thread-template').html();
               const template = Handlebars.compile(source);
               let threadObj = {thread: res.body};

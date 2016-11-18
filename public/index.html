@@ -37,7 +37,7 @@
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
 
             {{#if isOwner}}
-              <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
+              <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-thread">Edit Thread</button>
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
             {{/if}}
 
@@ -45,7 +45,7 @@
         </article>
         
         {{#each remarks}}
-          <div class="remark-content" id="view-remarks">
+          <div class="remark-content" id="view-remarks"> <!-- needs remId -->
             <div>{{text}}</div>
             <div>posted by {{username}}</div>
             <div class="remark-buttons">
@@ -160,6 +160,10 @@
         </map>
 
         <button id='all-regions-button'>All Regions</button>
+        <div id="state-object-display">Filtering threads by
+          <div id="state-region"></div>
+          <div id="state-drink-type"></div>
+        </div>
       </div>
       <!-- ------------------ drink type categories ---------------------- -->
         <ul class="drink-type-cat">
@@ -222,7 +226,16 @@
       </form>
     </div>
 
-<!-- ------------------ search threads primary---------------------- -->
+<!-- ------------------ edit remark ---------------------- -->
+    <div class="content" id="edit-remark">
+      <h2 id='edit-remark-header'>Edit Remark: </h2>
+      <form id="edit-remark-form">
+        <textarea id='edit-remark-textarea' rows="6" cols="80">Remark Text can be edited</textarea>
+        <input type="submit" value="Save Edit" class="submit">
+      </form>
+    </div>
+
+<!-- -------------- search threads primary -------------- -->
     <div class="content" id="search-threads">
       <h2 id='search-param-header'>Search Threads by: </h2>
       <form id="search-params-form">
@@ -311,7 +324,7 @@
     <script type="text/javascript" src="scripts/click_handlers/editThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/addThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/loginClick.js"></script>
-    <script type="text/javascript" src="scripts/controllers/logoutClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/logoutClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/signupClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/editThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/threadRemarkClick.js"></script>
