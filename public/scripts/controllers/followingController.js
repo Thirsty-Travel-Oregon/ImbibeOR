@@ -52,7 +52,7 @@
                     .set('Content-Type', 'application/json')
                      .then((res) => {
                        console.log(res.body.username);
-                       $('#following-users-tag').append('<div class ="content" id="followed-user-div"><h3 class="appended-username">'+res.body.username+'</h3><button class="view-followed-user-button" data-name="'+res.body.username+'">View Threads by User</button><button class="unfollow-button" data-name="'+res.body.username+'">Unfollow User</button><div>');
+                       $('#following-users-tag').append('<div class ="content" id="followed-user-div"><h3 class="appended-username">'+res.body.username+'</h3><button class="view-followed-user-button" data-userId="'+userId+'" data-name="'+res.body.username+'">View Threads by User</button><button class="unfollow-button" data-userId="'+userId+'" data-name="'+res.body.username+'">Unfollow User</button><div>');
                      })
                         .catch((err) => {
                           console.log(err);
