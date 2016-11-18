@@ -67,11 +67,20 @@ button:hover{
 
 #thread-container {
   width: 75%;
-  background-color: gold;
+  /*background-color: gold;*/
   border-radius: 1rem;
   padding: 0.25rem;
   margin-top: 0.5%;
 }
+
+.one-thread{
+  background-color: gold;
+}
+
+.remark-content{
+  background-color: lightyellow;
+}
+
 
 #flex-thread-container {
   display: -webkit-flex;
@@ -136,4 +145,12 @@ select:hover{
 #user-status{
   text-align: right;
   color: #F9F823;
+}
+
+.appended-username{
+  color: forestgreen;
+}
+
+.appended-threadname{
+  color: forestgreen;
 }

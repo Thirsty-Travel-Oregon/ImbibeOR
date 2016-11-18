@@ -25,6 +25,7 @@
             .then((res) => {
               console.log(res.body);
               if(res.body.threadsFollowed.length){
+                $('#following-threads-tag').text('You are following these threads:');
                 res.body.threadsFollowed.forEach(function(threadId){ 
                   superagent
                     .get ('/api/threads/'+threadId)
@@ -43,14 +44,15 @@
                 $('#following-threads-tag').text('You are currently not following any threads.');
               }
               if(res.body.usersFollowed.length){
+                $('#following-users-tag').text('You are following these users:');
                 res.body.usersFollowed.forEach(function(userId){ 
                   superagent
-                    .get ('/api/users/'+userId)
+                    .get ('/api/users/searchuser/'+userId)
                     .set('Authorization', token)
                     .set('Content-Type', 'application/json')
                      .then((res) => {
                        console.log(res.body.username);
-                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body[0].username+'</h4>');
+                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body.username+'</h4>');
                      })
                         .catch((err) => {
                           console.log(err);

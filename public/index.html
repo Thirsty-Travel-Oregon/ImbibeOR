@@ -203,7 +203,7 @@
         Thread Title<br>
         <input type="text" name="Thread Title"><br>
         Text<br>
-        <textarea name="Thread Text"rows="6" cols="80"></textarea>
+        <textarea id="add-thread-textarea" name="Thread Text"rows="6" cols="80"></textarea>
 
         <input type="submit" value="Add Thread" class="submit">
       </form>
@@ -213,7 +213,7 @@
       <h2 id='edit-thread-header'>Edit Thread: </h2>
       <h2 id='edit-thread-title'></h2>
       <form id="edit-thread-form">
-        <textarea id='edit-thread-textarea' rows="6" cols="80">Thread Text can be edited</textarea>
+        <textarea id='edit-thread-textarea' rows="6" cols="80" placeholder="Thread Text can be edited"></textarea>
         <input type="submit" value="Save Edit" class="submit">
       </form>
     </div>
@@ -280,7 +280,7 @@
    <div class="content" id="search-text-div">
       <form id="search-text-form">
         <h2 id='search-text-header'>Search by Text: </h2>
-        <textarea id='search-textarea' rows="2" cols="20">Enter search here</textarea><br>
+        <textarea id='search-textarea' rows="2" cols="20" placeholder="Enter search here"></textarea><br>
         <input type="submit" id="Search-text-submit" value="search for threads" class="submit">
       </form>
      </div> 
