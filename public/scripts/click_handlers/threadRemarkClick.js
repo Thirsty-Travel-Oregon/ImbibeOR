@@ -99,12 +99,27 @@ $('#thread-container').on('click', 'button', function(e) {
       });
   }else if (threadButtonClicked === 'delete-remark') {
     superagent
-      .delete(`/api/remarks/${remarkIdMarker}`) //not .del?
+      .delete(`/api/remarks/${remarkIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      // .send({threadId: threadIdMarker, userId: remOwnerIdMarker}) //no .send in delete
       .then(res => {
-        $(``)
+        $('#thread-container').empty();
+        console.log('thread Id Marker', threadIdMarker);
+        superagent
+          //threadIdMarker is null at this point - why?
+          //Cast to ObjectId failed for value "null" at path "_id"
+          //GET /api/threads/null 500 10.014 ms - 33
+          .get(`/api/threads/${threadIdMarker}`)
+          .set('Authorization', token)
+          .then(res => {
+            $('#thread-container').empty();
+            const source = $('#thread-template').html();
+            const template = Handlebars.compile(source);
+            let threadObj = {thread: res.body};
+            console.log('thread object: ', threadObj);
+            const newHtml = template(threadObj);
+            $('#thread-container').append(newHtml);
+          });
       })
       .catch((err) => {
         console.log(err);
