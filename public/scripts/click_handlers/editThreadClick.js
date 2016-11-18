@@ -42,7 +42,7 @@
       .catch((err) => {
         console.log(err);
       });
-    }, false);
+    });
   };
 
   module.editThreadClick = editThreadClick;
