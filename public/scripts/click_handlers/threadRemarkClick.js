@@ -86,13 +86,13 @@ $('#thread-container').on('click', 'button', function(e) {
 
   }else if (threadButtonClicked === 'delete-thread') {
     superagent
-      .del(`/api/threads/${threadIdMarker}`) //not .del?
+      .delete(`/api/threads/${threadIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      .end()
-      // .send({threadId: threadIdMarker, userId: threadOwnerIdMarker}) //no .send in delete
-      // .then(() => {
-      // })
+      .then(res => {
+        console.log('delete thread resbod', res.body);
+        $(`article[data-ThreadId="${res.body._id}"]`).remove();
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -102,7 +102,8 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       // .send({threadId: threadIdMarker, userId: remOwnerIdMarker}) //no .send in delete
-      .then(() => {
+      .then(res => {
+        $(``)
       })
       .catch((err) => {
         console.log(err);
