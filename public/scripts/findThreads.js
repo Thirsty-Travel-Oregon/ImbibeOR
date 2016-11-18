@@ -14,7 +14,7 @@
         };
         const newHtml = template(threadObject);
         $('#thread-container').append(newHtml);
-
+        $('#thread-container').fadeIn();
         if (!sessionStorage.getItem('storedToken')) {
           $('#thread-container button').hide();
           $('#remark-buttons button').hide();
