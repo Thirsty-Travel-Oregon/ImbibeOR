@@ -10,13 +10,15 @@ $('#thread-container').on('click', 'button', function(e) {
   const threadIdMarker = e.target.getAttribute('data-threadId');
   const remarkIdMarker = e.target.getAttribute('data-remId');
   const remOwnerIdMarker = e.target.getAttribute('data-userId');
+  const $textArea = $('textarea[name="Remark Text"]');
 
   if (threadButtonClicked === 'add-remark') {
     $('#add-remark').fadeIn();
+    $textArea.val('');
     $('#add-remark-form').submit(event => {
       event.preventDefault();
       $('#thread-container').empty();
-      let submitData = $('textarea[name="Remark Text"]').val();
+      let submitData = $textArea.val();
       const submitObj = {
         text: submitData,
         threadId: threadIdMarker,
@@ -87,19 +89,21 @@ $('#thread-container').on('click', 'button', function(e) {
       .delete(`/api/threads/${threadIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      .send({threadId: threadIdMarker, userId: threadOwnerIdMarker})
-      .then(() => {
+      .then(res => {
+        console.log('delete thread resbod', res.body);
+        $(`article[data-ThreadId="${res.body._id}"]`).remove();
       })
       .catch((err) => {
         console.log(err);
       });
   }else if (threadButtonClicked === 'delete-remark') {
     superagent
-      .delete(`/api/remarks/${remarkIdMarker}`)
+      .delete(`/api/remarks/${remarkIdMarker}`) //not .del?
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      .send({threadId: threadIdMarker, userId: remOwnerIdMarker})
-      .then(() => {
+      // .send({threadId: threadIdMarker, userId: remOwnerIdMarker}) //no .send in delete
+      .then(res => {
+        $(``)
       })
       .catch((err) => {
         console.log(err);
