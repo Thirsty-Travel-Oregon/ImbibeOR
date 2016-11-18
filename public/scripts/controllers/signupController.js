@@ -13,6 +13,7 @@
     }
     else{
       $('#login-link').hide();
+      $('#signup-link').hide();
     }
   };
 
