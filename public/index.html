@@ -45,7 +45,7 @@
         </article>
         
         {{#each remarks}}
-          <div class="remark-content" id="view-remarks">
+          <div class="remark-content" id="view-remarks"> <!-- needs remId -->
             <div>{{text}}</div>
             <div>posted by {{username}}</div>
             <div class="remark-buttons">
@@ -118,8 +118,18 @@
         <h2 id='logout-message'></h2>
          <button id="logout-button">Log Out</button>
       </div>
+</div>
 
-    </div>
+  <!-- --------------- following ------------------------- -->
+      <div class="content" id="following-page">
+        <h2 >Following </h2>
+        <h3 >Users</h3>
+        <h4 id='following-users-tag'>You are following these <em>users:<em></h4>
+        <br>
+        <h3 >Threads</h3>
+        <h4 id='following-threads-tag'>You are following these <em>threads:<em></h4>
+        <br>
+      </div>
 
     <div class ="content" id="flexcontainer">
       <!-- ----------------- image map ----------------------- -->
@@ -151,7 +161,6 @@
 
         <button id='all-regions-button'>All Regions</button>
       </div>
-
       <!-- ------------------ drink type categories ---------------------- -->
         <ul class="drink-type-cat">
           <li class="img-link" id="beer"><a href="#"><img src="./assets/beer-button.png" alt="BEER"></img></a></li>
@@ -213,6 +222,56 @@
       </form>
     </div>
 
+<!-- ------------------ search threads primary---------------------- -->
+    <div class="content" id="search-threads">
+      <h2 id='search-param-header'>Search Threads by: </h2>
+      <form id="search-params-form">
+         <select class ="search-select" id="search-params-select">
+          <option value="" disabled selected>Select Search Type</option>
+          <option value="author">Author</option>
+          <option value="text">Text</option>
+          <option value="region">Region</option>
+          <option value="drink-type">Drink Type</option>
+        </select>
+      </form>
+      <br>
+
+<!-- ------------------ search threads secondary---------------------- -->
+   <div class="content" id="drink-type-select-div">
+     <select class ="thread-select" id="drink-type-select-search" >
+       <option value="" disabled selected>Select Drink Type</option>
+       <option value="beer">Beer</option>
+       <option value="wine">Wine</option>
+       <option value="spirits">Spirits</option>
+       <option value="other">Other</option>
+     </select>
+   </div>
+
+   <div class="content" id="region-select-div">
+     <select class ="thread-select-param" id="region-select-search">
+        <option value="" disabled selected>Select Region</option>
+        <option value="portland">Portland</option>
+        <option value="willamette">Willamette Valley</option>
+        <option value="hood-gorge">Mt. Hood - Columbia Gorge</option>
+        <option value="northcoast">North Coast</option>
+        <option value="centralcoast">Central Coast</option>
+        <option value="southcoast">Southern Coast</option>
+        <option value="central">Central</option>
+        <option value="southern">Southern</option>
+        <option value="northeastern">Northeastern</option>
+        <option value="southeastern">Southeastern</option>
+          <!-- more options here -->
+     </select>
+   </div>
+
+   <div class="content" id="search-text-div">
+      <form id="search-text-form">
+        <h2 id='search-text-header'>Search by Text: </h2>
+        <textarea id='search-textarea' rows="2" cols="20">Enter search here</textarea><br>
+        <input type="submit" id="Search-text-submit" value="search for threads" class="submit">
+      </form>
+     </div> 
+</div>
 <!-- ----------------- view thread ----------------------- -->
     <div id="flex-thread-container">
       <div class="content" id="thread-container"></div>
@@ -223,17 +282,6 @@
       <h2>About ImbibeOR</h2>
       <p>ImbibeOR is a beverage travel forum. </p>
     </div>
-
-  <!-- --------------- following ------------------------- -->
-      <div class="content" id="following-page">
-        <h2 >Following </h2>
-        <h3 >Users</h3>
-        <h4 id='following-users-tag'>You are following these <em>users:<em></h4>
-        <br>
-        <h3 >Threads</h3>
-        <h4 id='following-threads-tag'>You are following these <em>threads:<em></h4>
-        <br>
-      </div>
 
 <!-- --------------------- footer ------------------- -->
     <div class="static" id="footer">
@@ -254,13 +302,16 @@
     <script type="text/javascript" src="scripts/findThreads.js"></script>
 
     <!-- Click Handlers Files -->
-
+    <script type="text/javascript" src="scripts/click_handlers/searchTextClick.js"></script> 
+    <script type="text/javascript" src="scripts/click_handlers/searchRegionClick.js"></script> 
+    <script type="text/javascript" src="scripts/click_handlers/searchDrinkClick.js"></script> 
+    <script type="text/javascript" src="scripts/click_handlers/searchParamsClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/allRegionsClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/editRemarkClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/editThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/addThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/loginClick.js"></script>
-    <script type="text/javascript" src="scripts/controllers/logoutClick.js"></script>
+    <script type="text/javascript" src="scripts/click_handlers/logoutClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/signupClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/editThreadClick.js"></script>
     <script type="text/javascript" src="scripts/click_handlers/threadRemarkClick.js"></script>
@@ -270,6 +321,7 @@
     <!-- Controller Files -->
     <script type="text/javascript" src="scripts/controllers/reloadHandler.js"></script>
     <script type="text/javascript" src="scripts/controllers/homeController.js"></script>
+    <script type="text/javascript" src="scripts/controllers/searchThreadsController.js"></script>
     <script type="text/javascript" src="scripts/controllers/signupController.js"></script>
     <script type="text/javascript" src="scripts/controllers/loginController.js"></script>
     <script type="text/javascript" src="scripts/controllers/aboutController.js"></script>

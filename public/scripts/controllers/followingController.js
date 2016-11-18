@@ -31,7 +31,7 @@
                     .set('Authorization', token)
                     .set('Content-Type', 'application/json')
                      .then((res) => {
-                       console.log('res body is ', res.body); 
+                       console.log('res body is ', res.body[0]); 
                        $('#following-threads-tag').append('<h4 class="appended-threadname">'+res.body[0].title+'</h4>');
                      })
                         .catch((err) => {
@@ -49,7 +49,8 @@
                     .set('Authorization', token)
                     .set('Content-Type', 'application/json')
                      .then((res) => {
-                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body.username+'</h4>');
+                       console.log(res.body.username);
+                       $('#following-users-tag').append('<h4 class="appended-username">'+res.body[0].username+'</h4>');
                      })
                         .catch((err) => {
                           console.log(err);
