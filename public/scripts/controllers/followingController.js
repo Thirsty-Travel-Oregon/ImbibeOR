@@ -45,7 +45,7 @@
               if(res.body.usersFollowed.length){
                 res.body.usersFollowed.forEach(function(userId){ 
                   superagent
-                    .get ('/api/users/'+userId)
+                    .get ('/api/users/searchuser'+userId)
                     .set('Authorization', token)
                     .set('Content-Type', 'application/json')
                      .then((res) => {
