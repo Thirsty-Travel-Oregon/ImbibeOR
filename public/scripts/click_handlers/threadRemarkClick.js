@@ -34,8 +34,17 @@ $('#thread-container').on('click', 'button', function(e) {
         .send(jsonData)
         .then((res) => {
           $('#add-remark').hide();
-          $('#thread-container').empty();
-          findThreads();
+          superagent
+            .get(`/api/threads/${threadIdMarker}`)
+            .set('Authorization', token)
+            .then(res => {
+              $('#thread-container').empty();
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              let threadObj = {thread: res.body};
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
         })
         .catch(err => {
           console.log(err);
@@ -91,8 +100,18 @@ $('#thread-container').on('click', 'button', function(e) {
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
       .then(res => {
-        $('#thread-container').empty();
-        findThreads();
+        console.log('deleteremresbod', res.body);
+        superagent
+            .get(`/api/threads/${res.body.threadId}`)
+            .set('Authorization', token)
+            .then(res => {
+              $('#thread-container').empty();
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              let threadObj = {thread: res.body};
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
       })
       .catch((err) => {
         console.log(err);
