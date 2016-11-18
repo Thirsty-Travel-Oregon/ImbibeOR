@@ -228,6 +228,7 @@
       <h2 id='search-param-header'>Search Threads by: </h2>
       <form id="search-params-form">
          <select class ="search-select" id="search-params-select">
+          <option value="" disabled selected>Select Search Type</option>
           <option value="author">Author</option>
           <option value="text">Text</option>
           <option value="region">Region</option>
@@ -267,8 +268,8 @@
    <div class="content" id="search-text-div">
       <form id="search-text-form">
         <h2 id='search-text-header'>Search by Text: </h2>
-        <textarea id='edit-thread-textarea' rows="2" cols="20">Enter search here</textarea><br>
-        <input type="submit" id="Search-text-submit" value="search-threads" class="submit">
+        <textarea id='search-textarea' rows="2" cols="20">Enter search here</textarea><br>
+        <input type="submit" id="Search-text-submit" value="search for threads" class="submit">
       </form>
      </div> 
 
@@ -300,6 +301,7 @@
     <script type="text/javascript" src="scripts/findThreads.js"></script>
 
     <!-- Click Handlers Files -->
+    <script type="text/javascript" src="scripts/click_handlers/searchTextClick.js"></script> 
     <script type="text/javascript" src="scripts/click_handlers/searchRegionClick.js"></script> 
     <script type="text/javascript" src="scripts/click_handlers/searchDrinkClick.js"></script> 
     <script type="text/javascript" src="scripts/click_handlers/searchParamsClick.js"></script>
