@@ -1,6 +1,5 @@
 $('#add-thread-form').submit(function(event) {
   event.preventDefault();
-  $('add-thread-textarea').text('');
   var submitData = $( this ).serializeArray();
   const userId =  sessionStorage.getItem('storedUserID');
   if(!userId.length){
