@@ -34,8 +34,17 @@ $('#thread-container').on('click', 'button', function(e) {
         .send(jsonData)
         .then((res) => {
           $('#add-remark').hide();
-          $('#thread-container').empty();
-          findThreads();
+          superagent
+            .get(`/api/threads/${threadIdMarker}`)
+            .set('Authorization', token)
+            .then(res => {
+              $('#thread-container').empty();
+              const source = $('#thread-template').html();
+              const template = Handlebars.compile(source);
+              let threadObj = {thread: res.body};
+              const newHtml = template(threadObj);
+              $('#thread-container').append(newHtml);
+            });
         })
         .catch(err => {
           console.log(err);
