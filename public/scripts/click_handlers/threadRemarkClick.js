@@ -81,7 +81,8 @@ $('#thread-container').on('click', 'button', function(e) {
 
   }else if (threadButtonClicked === 'edit-remark') {
     const threadIdMarker = e.target.getAttribute('data-threadId');
-    editRemarkClick(threadIdMarker);
+    console.log('in threadRemarkClick', remarkIdMarker);
+    editRemarkClick(remarkIdMarker, threadIdMarker);
 
 
   }else if (threadButtonClicked === 'delete-thread') {
