@@ -75,13 +75,14 @@ $('#thread-container').on('click', 'button', function(e) {
       .catch((err) => {
         console.log(err);
       });
-  }else if (threadButtonClicked === 'edit-post') {
+  }else if (threadButtonClicked === 'edit-thread') {
     const threadIdMarker = e.target.getAttribute('data-threadId');
     editThreadClick(threadIdMarker);
 
   }else if (threadButtonClicked === 'edit-remark') {
     const threadIdMarker = e.target.getAttribute('data-threadId');
-    editRemarkClick(threadIdMarker);
+    console.log('in threadRemarkClick', remarkIdMarker);
+    editRemarkClick(remarkIdMarker, threadIdMarker);
 
 
   }else if (threadButtonClicked === 'delete-thread') {
@@ -98,12 +99,27 @@ $('#thread-container').on('click', 'button', function(e) {
       });
   }else if (threadButtonClicked === 'delete-remark') {
     superagent
-      .delete(`/api/remarks/${remarkIdMarker}`) //not .del?
+      .delete(`/api/remarks/${remarkIdMarker}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', token)
-      // .send({threadId: threadIdMarker, userId: remOwnerIdMarker}) //no .send in delete
       .then(res => {
-        $(``)
+        $('#thread-container').empty();
+        console.log('thread Id Marker', threadIdMarker);
+        superagent
+          //threadIdMarker is null at this point - why?
+          //Cast to ObjectId failed for value "null" at path "_id"
+          //GET /api/threads/null 500 10.014 ms - 33
+          .get(`/api/threads/${threadIdMarker}`)
+          .set('Authorization', token)
+          .then(res => {
+            $('#thread-container').empty();
+            const source = $('#thread-template').html();
+            const template = Handlebars.compile(source);
+            let threadObj = {thread: res.body};
+            console.log('thread object: ', threadObj);
+            const newHtml = template(threadObj);
+            $('#thread-container').append(newHtml);
+          });
       })
       .catch((err) => {
         console.log(err);
