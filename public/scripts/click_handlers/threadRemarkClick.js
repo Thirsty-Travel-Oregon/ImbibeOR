@@ -75,7 +75,7 @@ $('#thread-container').on('click', 'button', function(e) {
       .catch((err) => {
         console.log(err);
       });
-  }else if (threadButtonClicked === 'edit-post') {
+  }else if (threadButtonClicked === 'edit-thread') {
     const threadIdMarker = e.target.getAttribute('data-threadId');
     editThreadClick(threadIdMarker);
 

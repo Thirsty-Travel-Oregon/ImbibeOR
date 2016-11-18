@@ -37,7 +37,7 @@
             <button data-threadId="{{_id}}" data-userId="{{userId}}" name="create-thread">Create New Thread</button>
 
             {{#if isOwner}}
-              <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-post">Edit Post</button>
+              <button data-threadId="{{_id}}" data-userId="{{userId}}" name="edit-thread">Edit Thread</button>
               <button data-threadId="{{_id}}" data-userId="{{userId}}" name="delete-thread">Delete Thread</button>
             {{/if}}
 
@@ -160,6 +160,10 @@
         </map>
 
         <button id='all-regions-button'>All Regions</button>
+        <div id="state-object-display">Filtering threads by
+          <div id="state-region"></div>
+          <div id="state-drink-type"></div>
+        </div>
       </div>
       <!-- ------------------ drink type categories ---------------------- -->
         <ul class="drink-type-cat">
