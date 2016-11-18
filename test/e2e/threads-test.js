@@ -139,8 +139,8 @@ describe('Thread Tests: ', () => {
         testThread.createdAt = thread.createdAt;
         testThread.updatedAt = thread.updatedAt;
         testThread.userId = thread.userId;
-        testThread.remarks = thread.remarks;
-        testThread.isOwner = thread.isOwner;
+        testThread.remarks = [];
+        testThread.isOwner = true;
         done();
       })
       .catch(done);
@@ -152,6 +152,8 @@ describe('Thread Tests: ', () => {
       .set('Authorization', `Bearer ${tokenBasic}`)
       .then( res => {
         assert.deepEqual(res.body, [testThread]);
+        delete testThread.remarks;
+        delete testThread.isOwner;
         done();
       })
       .catch(done);
@@ -176,7 +178,6 @@ describe('Thread Tests: ', () => {
       .set('Authorization', `Bearer ${tokenBasic}`)
       .send(testThreadUpd)
       .then(res => {
-        delete testThread.remarks;
         assert.deepEqual(res.body, testThread);
         testThread.text = testThreadUpd.text;
         done();
@@ -191,14 +192,14 @@ describe('Thread Tests: ', () => {
       .then( res => {
         // CANNOT use the deepEqual as the updatedAt field changes due to the prior PUT
         // assert.deepEqual(res.body, testThread);
-        assert.equal(res.body._id, testThread._id);
-        assert.equal(res.body._v, testThread._v);
-        assert.equal(res.body.title, testThread.title);
-        assert.equal(res.body.text, testThread.text);
-        assert.equal(res.body.region, testThread.region);
-        assert.equal(res.body.drinkType, testThread.drinkType);
-        assert.equal(res.body.userId, testThread.userId);
-        assert.equal(res.body.createdAt, testThread.createdAt);
+        assert.equal(res.body[0]._id, testThread._id);
+        assert.equal(res.body[0]._v, testThread._v);
+        assert.equal(res.body[0].title, testThread.title);
+        assert.equal(res.body[0].text, testThread.text);
+        assert.equal(res.body[0].region, testThread.region);
+        assert.equal(res.body[0].drinkType, testThread.drinkType);
+        assert.equal(res.body[0].userId, testThread.userId);
+        assert.equal(res.body[0].createdAt, testThread.createdAt);
         done();
       })
       .catch(done);
