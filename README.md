@@ -9,13 +9,17 @@ Javascript fueled message board for beverage travel in Oregon.
 
 
 ### Project Functionality
-  - This is a Code Fellows Project to create an http express server that uses mongoDB for persistent storage and retrieval and mongoose as the templating and validation layer then push 
+  - This is a Code Fellows Project to create an http express server that uses mongoDB for persistent storage and retrieval and mongoose as the templating and validation layer.
+  - The database holds three working collections: users, profile data for each member, and Threads and Remarks in a Parent - Child relationship.
+  - The dataset to be rendered to the page can be filtered by region, drinktype or a combination of both.
+  - Keyword search functionality extends filtering further.
+  - Signed-in members can follow other members or threads then display those threads at a later time. 
 
   - The app also has an authentication system to sign-in users and allow specific types of users access to specified routes
 
   - The http server runs on localhost:3030
 
-  [Live Site Here](http://Imbibe-OR.herokuapp.com/)
+  [Live Site Here](http://imbibe-or.herokuapp.com/)
 
 
 ### Technologies used
