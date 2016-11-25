@@ -23,9 +23,9 @@
   "author": "Thirsty-Travel-Oregon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JPGothro/ImbibeOR/issues"
+    "url": "https://github.com/Thirsty-Travel-Oregon/ImbibeOR/issues"
   },
-  "homepage": "https://github.com/JPGothro/ImbibeOR#readme",
+  "homepage": "https://github.com/Thirsty-Travel-Oregon/ImbibeOR#readme",
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.2",

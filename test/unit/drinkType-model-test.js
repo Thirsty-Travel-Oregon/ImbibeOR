@@ -1,4 +1,4 @@
-// Testing the Apartment Unit Model
+// Testing the Apartment Unit Model WAT? Dead comments kill kittens...
 const DrinkType = require('../../lib/models/drinkType');
 const assert = require('chai').assert;
 
@@ -8,16 +8,12 @@ describe('Validate DrinkType model', () => {
     const newDrinkType = new DrinkType({
       drinkType: 'test drinktype'
     });
-
-    newDrinkType.validate(err => {
-      if (!err) done();
-      else done(err);
-    });
+    
+    newDrinkType.validate(done);
   });
 
   it('Validation with missing drinkType', done => {
-    const newDrinkType = new DrinkType({
-    });
+    const newDrinkType = new DrinkType();
 
     newDrinkType.validate(err => {
       assert.isOk(err, 'drinkType should be required');

@@ -19,6 +19,7 @@ describe('user routing', () => {
     else connection.once('open', drop);
   });
 
+  // This isn't used :( Remove dead code!
   function getUserId(user, done) {
     User.find({username: user.username})
       .then(res => {
@@ -29,6 +30,7 @@ describe('user routing', () => {
       .catch(done);
   }
 
+  // same code as threads-test.js, extract to module!
   const testAdmin = {
     username: 'testAdmin',
     password: 'testAdmin',
@@ -128,6 +130,10 @@ describe('user routing', () => {
       })
       .catch(done);
   });
+
+  // these Follow tests are good. each section in 
+  // this file should be in own describe block, ie
+  // "User CRUD", "Following", 'etc'
 
   it('FOLLOW User', done => {
     followsUser.userId = testUser._id;
