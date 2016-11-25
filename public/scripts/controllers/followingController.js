@@ -24,9 +24,11 @@
             .set('Content-Type', 'application/json')
             .then((res) => {
               console.log(res.body);
-              if(res.body.threadsFollowed.length){
+              // alias when repetitive:
+              const threadFollowed = req.body.threadsFollowed;
+              if(threadsFollowed.length){
                 $('#following-threads-tag').text('You are following these threads:');
-                res.body.threadsFollowed.forEach(function(threadId){ 
+                threadsFollowed.forEach(function(threadId){ 
                   superagent
                     .get ('/api/threads/'+threadId)
                     .set('Authorization', token)
@@ -43,29 +45,42 @@
               else{
                 $('#following-threads-tag').text('You are currently not following any threads.');
               }
-              if(res.body.usersFollowed.length){
-                $('#following-users-tag').text('You are following these users:');
-                res.body.usersFollowed.forEach(function(userId){ 
-                  superagent
-                    .get ('/api/users/searchuser/'+userId)
-                    .set('Authorization', token)
-                    .set('Content-Type', 'application/json')
-                     .then((res) => {
-                       console.log(res.body.username);
-                       $('#following-users-tag').append('<div class ="content" id="followed-user-div"><h3 class="appended-username">'+res.body.username+'</h3><button class="view-followed-user-button" data-userId="'+userId+'" data-name="'+res.body.username+'">View Threads by User</button><button class="unfollow-button" data-userId="'+userId+'" data-name="'+res.body.username+'">Unfollow User</button><div>');
-                     })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                });
-              }
-              else{
-                $('#following-users-tag').text('You are currently not following any users.');
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+              const usersFollowed = res.body.usersFollowed;
+              if(usersFollowed.length){
+                // Food for thought: consider this code versus your original code...
+                const tag = $('#following-users-tag');
+                
+                tag.text('You are following these users:');
+
+                const getUsers = usersFollowed.map(userId => superagent
+                  .get ('/api/users/searchuser/'+userId)
+                  .set('Authorization', token)
+                  .set('Content-Type', 'application/json')
+                );
+
+                Promise.all(getUsers)
+                  .then(res => res.map(r => res.body.username)
+                  .then(usernames => {
+                    usernames.forEach(username => {
+                      tag.append(`<div class ="content" id="followed-user-div">
+                        <h3 class="appended-username">${username}</h3>
+                        <button class="view-followed-user-button" 
+                          data-userId="${userId}" 
+                          data-name="${username}">
+                          View Threads by User
+                        </button>
+                        <button class="unfollow-button" 
+                          data-userId="${userId}" 
+                          data-name="${username}">
+                          Unfollow User
+                        </button>
+                        <div>
+                      `);
+                    });
+                  })
+                  .catch(err => console.log(err));
+           
+                
     }
   };
 

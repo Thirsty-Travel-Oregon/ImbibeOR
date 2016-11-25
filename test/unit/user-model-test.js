@@ -44,7 +44,7 @@ describe('Validate User model', () => {
     });
 
     newUser.validate(err => {
-      assert.isOk(err, 'region should be required');
+      assert.isOk(err, 'user name should be required');
       done();
     });
   });
@@ -60,7 +60,7 @@ describe('Validate User model', () => {
     });
 
     newUser.validate(err => {
-      assert.isOk(err, 'region should be required');
+      assert.isOk(err, 'password should be required');
       done();
     });
   });

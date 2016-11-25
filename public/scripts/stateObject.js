@@ -4,6 +4,5 @@
     drinkType: 'all'
   };
 
-
   module.stateObject = stateObject;
 })(window);

@@ -43,11 +43,11 @@ describe('Thread Tests: ', () => {
     tokenModerator = '',
     tokenBasic = '';
 
-  before( done => {
+  before(done => {
     request
-      .post( '/api/auth/signup' )
-      .send( userAdmin )
-      .then( res => {
+      .post('/api/auth/signup')
+      .send(userAdmin)
+      .then(res => {
         assert.ok( tokenAdmin = res.body.token );
         assert.ok(userAdmin.userId = res.body.userId);
         done();
@@ -55,11 +55,12 @@ describe('Thread Tests: ', () => {
       .catch(done);
   });
 
-  before( done => {
+  before(done => {
     request
       .post( '/api/auth/signup' )
       .send( userModerator )
       .then( res => {
+        // be consistent with formatting style. Even these two sibling lines don't agree!
         assert.ok( tokenModerator = res.body.token );
         assert.ok(userModerator.userId = res.body.userId);
         done();
@@ -112,6 +113,7 @@ describe('Thread Tests: ', () => {
     text: 'Updated thread text'
   };
 
+  // auth is already tested in auth.test.js. don't repeat these here
   it('POST request no token', done => {
     request
       .post('/api/threads')
@@ -159,19 +161,6 @@ describe('Thread Tests: ', () => {
       .catch(done);
   });
 
-  it('PUT request - invalid token', done => {
-    request
-      .put(`/api/threads/${testThread._id}`)
-      .set('Authorization', 'Bearer XXX')
-      .send(testThreadUpd)
-      .then(res => done( 'status should not be 200' ) )
-      .catch( res => {
-        assert.equal( res.status, 403 );
-        assert.equal( res.response.body.error, 'Unauthorized - Invalid Token' );
-        done();
-      });
-  });
-
   it('PUT request - valid token', done => {
     request
       .put(`/api/threads/${testThread._id}`)
@@ -190,8 +179,16 @@ describe('Thread Tests: ', () => {
       .get(`/api/threads/${testThread._id}`)
       .set('Authorization', `Bearer ${tokenBasic}`)
       .then( res => {
+        // don't repeat, and better to give meaningful name
+        const thread = req.body[0]; 
+
         // CANNOT use the deepEqual as the updatedAt field changes due to the prior PUT
-        // assert.deepEqual(res.body, testThread);
+        
+        // could do:
+        delete thread.updatedAt;
+        delete testThread.updatedAt;
+        assert.deepEqual(res.body, testThread);
+
         assert.equal(res.body[0]._id, testThread._id);
         assert.equal(res.body[0]._v, testThread._v);
         assert.equal(res.body[0].title, testThread.title);
@@ -222,6 +219,8 @@ describe('Thread Tests: ', () => {
       .delete(`/api/threads/${testThread._id}`)
       .set('Authorization', `Bearer ${tokenBasic}`)
       .then(res => {
+        // Same test as above, extract to function!
+
         // CANNOT use the deepEqual as the updatedAt field changes due to the prior PUT
         // assert.deepEqual(res.body, testThread);
         assert.equal(res.body._id, testThread._id);
