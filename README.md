@@ -40,7 +40,7 @@ Javascript fueled message board for beverage travel in Oregon.
 
 
 ### Directions to run locally
-  - Download the files
+  - Clone this repository
   - Set up database
     - [Download MongoDB](https://www.mongodb.com/download-center#community)
     - create a .env file - refer to .env.example
@@ -67,7 +67,7 @@ Javascript fueled message board for beverage travel in Oregon.
       ```
     - this will first run eslint - for more info look at .eslintrc
     - then mocha run unit tests and e2e tests
-
+    
 
 ### Code Shape
   - The code has been vetted using eslint & Travis-CI
